@@ -50,8 +50,8 @@ namespace Engine.Engine.GameComponents
             GameOrientation = Orientation.LANDSCAPE;
             GameMode = Mode.PLAYFIELD;
 
-            defaultWindowWidth = 21*50; //(int)(DisplayWidth * (2f / 3f));
-            defaultWindowHeight = 9*50; //(int)(DisplayHeight * (2f / 3f));
+            defaultWindowWidth = 1280;
+            defaultWindowHeight = 720;
             
             // Set Screen Dimensions.
             graphics.PreferredBackBufferWidth = defaultWindowWidth;
@@ -132,7 +132,7 @@ namespace Engine.Engine.GameComponents
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Palette.ConeOrange);
+            GraphicsDevice.Clear(Palette.SkyBlue);
 
             // Dynamic Camera.
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);

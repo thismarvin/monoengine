@@ -43,7 +43,6 @@ namespace Engine.Engine.Level
             levelWidth = Camera.ScreenBounds.Width;
             levelHeight = Camera.ScreenBounds.Height;
             Entities.Clear();
-            Entities.Add(new Shape(0, 0, Camera.ModifiedScreenBounds.Width, Camera.ModifiedScreenBounds.Height, 1, Color.Red));
         }
 
         private static void BackToMenu()
@@ -85,8 +84,6 @@ namespace Engine.Engine.Level
                 Entities.Add(e);
 
             EntityBuffer.Clear();
-
-            ((Shape)Entities[0]).SetWidth(Camera.ModifiedScreenBounds.Width);
         }
 
         // Permanently deletes entites that are offscreen. Useful for a game that has the character always moving right.
