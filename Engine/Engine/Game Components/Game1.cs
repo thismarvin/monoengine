@@ -132,7 +132,7 @@ namespace Engine.Engine.GameComponents
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Palette.SkyBlue);
+            GraphicsDevice.Clear(Palette.ConeOrange);
 
             // Dynamic Camera.
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
