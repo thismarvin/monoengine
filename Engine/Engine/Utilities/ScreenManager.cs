@@ -31,45 +31,7 @@ namespace Engine.Engine.Utilities
             DefaultWindowHeight = defaultWindowHeight;
 
             mappedKey = Keys.F10;
-            WideScreenSupport = true;
-
-            //FindAspectRatio();
-        }
-
-        private static void FindAspectRatio()
-        {
-            List<int> widthFactors = new List<int>();
-            List<int> heightFactors = new List<int>();
-
-            FillListWithFactors(widthFactors, DisplayWidth);
-            FillListWithFactors(heightFactors, DisplayHeight);
-
-            int GCF = 1;
-            for (int i = widthFactors.Count - 1; i >= 0; i--)
-            {
-                for (int j = heightFactors.Count - 1; j >= 0; j--)
-                {
-                    if (widthFactors[i] == heightFactors[j] && widthFactors[i] > GCF)
-                    {
-                        GCF = widthFactors[i];
-                        break;
-                    }
-                }
-            }
-            Console.WriteLine(DisplayWidth / GCF + ":" + DisplayHeight / GCF);
-        }
-
-        private static void FillListWithFactors(List<int> list, int number)
-        {
-            for (int i = 1; i < (int)Math.Sqrt(number) + 1; i++)
-            {
-                if (number % i == 0)
-                {
-                    list.Add(i);
-                    list.Add(number / i);
-                }
-            }
-            list.Sort();
+            WideScreenSupport = false;
         }
 
         public static void StartFullScreen(GraphicsDeviceManager graphics)
