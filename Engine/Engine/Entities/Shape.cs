@@ -68,6 +68,11 @@ namespace Engine.Engine.Entities
             Setup();
         }
 
+        public new void SetHeight(int height){
+            base.SetHeight(height);
+            Setup();
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (Show)
