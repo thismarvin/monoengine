@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Engine/Engine/Content/Assets/Sprites/ASCII 16.png</SourceFile>
+  <SourceFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/ASCII 16.png</SourceFile>
   <SourceTime>2017-10-21T21:15:08-05:00</SourceTime>
-  <DestFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Engine/Engine/Content/bin/DesktopGL/Content/Assets/Sprites/ASCII 16.xnb</DestFile>
-  <DestTime>2019-01-03T18:33:34.2617509-06:00</DestTime>
+  <DestFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/bin/DesktopGL/Content/Assets/Sprites/ASCII 16.xnb</DestFile>
+  <DestTime>2019-01-14T06:43:48.1321805-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-09-23T16:55:52-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
