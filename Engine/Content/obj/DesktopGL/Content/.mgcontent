@@ -4,11 +4,11 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/ASCII 16.png</File>
-    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/ASCII 19.png</File>
-    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/ASCII 8.png</File>
-    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/Player.png</File>
-    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Current/Monoengine/monoengine/Engine/Content/Assets/Sprites/Sprites.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/ASCII 16.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/ASCII 19.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/ASCII 8.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/Player.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/Sprites.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
