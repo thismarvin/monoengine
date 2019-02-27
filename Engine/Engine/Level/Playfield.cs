@@ -31,11 +31,6 @@ namespace Engine.Engine.Level
 
         private static bool noSpam;
 
-        public enum EnteredFrom
-        {
-            Top, Left, Bottom, Right
-        }
-
         public static void Initialize()
         {
             Entities = new List<Entity>();
