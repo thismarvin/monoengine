@@ -12,7 +12,7 @@ using Engine.Engine.GameComponents;
 namespace Engine.Engine.Utilities
 {
     class Stopwatch : MonoObject
-    {     
+    {
         List<Number> numbers;
         List<Sprite> sprites;
         Timer timer;
@@ -21,7 +21,7 @@ namespace Engine.Engine.Utilities
         Type type;
         public enum Type
         {
-            COUNTUP, COUNTDOWN
+            CountUp, CountDown
         }
 
         public Stopwatch(float x, float y, string currentTime, Type timerType, Sprite.Type spriteType) : base(x, y)
@@ -30,18 +30,18 @@ namespace Engine.Engine.Utilities
             sprites = new List<Sprite>();
             type = timerType;
             int textWidth = 0;
-            increment = type == Type.COUNTUP ? 1 : -1;
+            increment = type == Type.CountUp ? 1 : -1;
 
             switch (spriteType)
             {
-                case Sprite.Type.TEXT_8x8:
+                case Sprite.Type.Text8x8:
                     textWidth = 8;
                     break;
             }
 
             timer = new Timer(1000);
 
-            int colonCount = 0;   
+            int colonCount = 0;
             for (int i = 0; i < currentTime.Length; i++)
             {
                 colonCount = currentTime.Substring(i, 1) == ":" ? ++colonCount : colonCount;
@@ -52,11 +52,11 @@ namespace Engine.Engine.Utilities
 
             for (int i = 0; i < colonCount + 1; i++)
             {
-                numbers.Add(new Number(offset, Y, ParseTime(index, currentTime), 2, 60, spriteType));
+                numbers.Add(new Number(offset, y, ParseTime(index, currentTime), 2, 60, spriteType));
                 offset += textWidth * 2;
                 if (i != colonCount)
                 {
-                    sprites.Add(new Sprite(offset, Y, Sprite.Type.COLON8));
+                    sprites.Add(new Sprite(offset, y, Sprite.Type.Colon8));
                 }
                 offset += 4;
                 index += 3;
@@ -85,7 +85,7 @@ namespace Engine.Engine.Utilities
 
             if (numbers[numbers.Count - 1].CurrentValue >= 60 || numbers[numbers.Count - 1].CurrentValue < 0)
             {
-                if (type == Type.COUNTUP)
+                if (type == Type.CountUp)
                 {
                     numbers[numbers.Count - 1].Set(0);
                 }
@@ -93,7 +93,7 @@ namespace Engine.Engine.Utilities
                 {
                     numbers[numbers.Count - 1].Set(59);
                 }
-                
+
                 numbers[numbers.Count - 2].Increment(increment);
             }
 
@@ -109,6 +109,7 @@ namespace Engine.Engine.Utilities
             {
                 N.Draw(spriteBatch);
             }
+
             foreach (Sprite S in sprites)
             {
                 S.Draw(spriteBatch);

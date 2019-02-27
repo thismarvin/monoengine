@@ -19,8 +19,6 @@ namespace Engine.Engine.Utilities
 
         public Number(float x, float y, int currentValue, int totalPlaceValue, int maxValue, Sprite.Type whatFont) : base(x, y)
         {
-            SetLocation(x, y);
-
             MaxValue = maxValue;
             CurrentValue = currentValue;
 
@@ -29,20 +27,20 @@ namespace Engine.Engine.Utilities
             int textWidth = 0;
             switch (whatFont)
             {
-                case Sprite.Type.TEXT_8x8:
+                case Sprite.Type.Text8x8:
                     textWidth = 8;
                     break;
-                case Sprite.Type.TEXT_16x16:
+                case Sprite.Type.Text16x16:
                     textWidth = 14;
                     break;
-                case Sprite.Type.TEXT_19x19:
+                case Sprite.Type.Text19x19:
                     textWidth = 14;
                     break;
             }
 
             for (int i = totalPlaceValue - 1; i >= 0; i--)
             {
-                sprites.Add(new Sprite((int)Location.X + (textWidth * i), (int)Location.Y, whatFont));
+                sprites.Add(new Sprite((int)x + (textWidth * i), (int)y, whatFont));
             }
 
             Set(CurrentValue);

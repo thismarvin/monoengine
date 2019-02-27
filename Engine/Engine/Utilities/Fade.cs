@@ -12,25 +12,27 @@ namespace Engine.Engine.Utilities
 {
     class Fade : MonoObject
     {
-        Shape shape;             
+        Shape shape;
         Color fade;
         public bool Done { get; private set; }
         Type type;
+        Timer timer;
 
         public enum Type
         {
-            FADETOBLACK, FADEFROMBACK
+            FadeToBlack, FadeFromBlack
         }
 
         public Fade(float x, float y, Type type) : base(x, y)
         {
             this.type = type;
+            timer = new Timer(10);
             Reset();
         }
 
         public void Reset()
         {
-            if (type == Type.FADEFROMBACK)
+            if (type == Type.FadeFromBlack)
             {
                 fade = new Color(0, 0, 0, 255);
             }
@@ -39,16 +41,17 @@ namespace Engine.Engine.Utilities
                 fade = new Color(0, 0, 0, 0);
             }
 
-            shape = new Shape(X, Y, Camera.ScreenBounds.Width, Camera.ScreenBounds.Height, fade);
+            shape = new Shape(X, Y, Camera.RealScreenBounds.Width, Camera.RealScreenBounds.Height, fade);
         }
 
-        private void FadeLogic()
+        private void FadeLogic(GameTime gameTime)
         {
-            if (!Done)
+            timer.Update(gameTime);
+            if (!Done && timer.Done)
             {
                 switch (type)
                 {
-                    case Type.FADETOBLACK:
+                    case Type.FadeToBlack:
                         if (fade.A <= 240)
                         {
                             fade.A += 10;
@@ -59,8 +62,8 @@ namespace Engine.Engine.Utilities
                         }
                         break;
 
-                    case Type.FADEFROMBACK:
-                        if (fade.A >= 0)
+                    case Type.FadeFromBlack:
+                        if (fade.A > 0)
                         {
                             fade *= 0.95f;
                         }
@@ -71,15 +74,16 @@ namespace Engine.Engine.Utilities
                         break;
                 }
                 shape.ObjectColor = fade;
+                timer.Reset();
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            FadeLogic();
+            FadeLogic(gameTime);
         }
 
-        public void Draw (SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             shape.Draw(spriteBatch);
         }

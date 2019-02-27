@@ -1,12 +1,14 @@
-﻿ 
+﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Engine.Engine.GameComponents;
+using Engine.Engine.Level;
 
 namespace Engine.Engine.Utilities
 {
@@ -17,6 +19,7 @@ namespace Engine.Engine.Utilities
         public static int DefaultWindowHeight { get; private set; }
         public static int DefaultWindowWidth { get; private set; }
         public static float FPS { get; private set; }
+        static Queue<float> sampleFPS;
         static Keys mappedKey;
         static bool released;
         static bool fullscreen;
@@ -31,7 +34,9 @@ namespace Engine.Engine.Utilities
             DefaultWindowHeight = defaultWindowHeight;
 
             mappedKey = Keys.F10;
-            WideScreenSupport = false;
+            WideScreenSupport = true;
+
+            sampleFPS = new Queue<float>();
         }
 
         public static void StartFullScreen(GraphicsDeviceManager graphics)
@@ -49,7 +54,16 @@ namespace Engine.Engine.Utilities
 
         private static void UpdateFPS(GameTime gameTime)
         {
-            FPS = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if ((float)gameTime.ElapsedGameTime.TotalSeconds != 0)
+            {
+                sampleFPS.Enqueue(1 / (float)gameTime.ElapsedGameTime.TotalSeconds);
+            }
+
+            if (sampleFPS.Count == 100)
+            {
+                FPS = sampleFPS.Average(i => i);
+                sampleFPS.Dequeue();
+            }
         }
 
         private static void KeyboardInput(GraphicsDeviceManager graphics)

@@ -12,19 +12,22 @@ namespace Engine.Engine.Utilities
     {
         public static float Zoom { get; set; }
         public static Rectangle ScreenBounds { get; private set; }
-        public static Rectangle ModifiedScreenBounds { get; private set; }
+        public static Rectangle RealScreenBounds { get; private set; }
         public static Matrix Transform { get; private set; }
         public static Vector2 TopLeft;
 
+        public static int Scale { get; private set; }
+
         public static void Initialize()
         {
-            Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);        
+            Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
         }
 
         public static void Reset(int windowWidth, int windowHeight)
         {
-            int longSide = 384;
-            int shortSide = 216;
+            Scale = 3;
+            int longSide = 480 * Scale;
+            int shortSide = 270 * Scale;
 
             switch (Game1.GameOrientation)
             {
@@ -42,12 +45,13 @@ namespace Engine.Engine.Utilities
                             longSide = (int)((windowWidth - ScreenBounds.Width * Zoom) / Zoom) + ScreenBounds.Width;
                         }
                     }
-                    ModifiedScreenBounds = new Rectangle(0, 0, longSide, shortSide);
+                    RealScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
                 case Game1.Orientation.PORTRAIT:
                     ScreenBounds = new Rectangle(0, 0, shortSide, longSide);
                     Zoom = windowWidth / (float)ScreenBounds.Width;
+                    RealScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
             }
         }
@@ -69,7 +73,7 @@ namespace Engine.Engine.Utilities
 
         public static void Update(Vector2 topLeft, float minWidth, float maxWidth, float minHeight, float maxHeight)
         {
-            TopLeft = topLeft;
+            TopLeft = topLeft * Scale;
 
             Input();
             StayWithinBounds(minWidth, maxWidth, minHeight, maxHeight);

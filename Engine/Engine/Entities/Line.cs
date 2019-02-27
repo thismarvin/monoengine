@@ -16,7 +16,7 @@ namespace Engine.Engine.Entities
         int distance;
         int thickness;
 
-        public Line(float x1, float y1, float x2, float y2) : base(x1, y1, 1, 1, Entities.LINE)
+        public Line(float x1, float y1, float x2, float y2) : base(x1, y1, 1, 1)
         {
             origin = new Vector2(x1, y1);
             endPoint = new Vector2(x2, y2);

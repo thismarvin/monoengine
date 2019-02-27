@@ -19,19 +19,28 @@ namespace Engine.Engine.Level
         public static List<Entity> Entities { get; private set; }
         public static List<Entity> EntityBuffer { get; private set; }
         public static List<Shape> BoundingBoxes { get; private set; }
+
         public static Vector2 CameraLocation { get; private set; }
+
+        public static Random RNG { get; set; }
+
         public static bool GameOver { get; set; }
 
-        static Random RNG;
-        static int levelWidth;
-        static int levelHeight;
+        public static List<Player> Players { get; private set; }
+        public static bool Multiplayer { get; private set; }
 
-        public static Player Player { get; private set; }
+        private static bool noSpam;
+
+        public enum EnteredFrom
+        {
+            Top, Left, Bottom, Right
+        }
 
         public static void Initialize()
         {
             Entities = new List<Entity>();
             EntityBuffer = new List<Entity>();
+            Players = new List<Player>();
             RNG = new Random(DateTime.Now.Millisecond);
             Reset();
         }
@@ -39,11 +48,35 @@ namespace Engine.Engine.Level
         public static void Reset()
         {
             GameOver = false;
-            CameraLocation = new Vector2(0, 0);
-            levelWidth = Camera.ScreenBounds.Width;
-            levelHeight = Camera.ScreenBounds.Height;
+
             Entities.Clear();
+            ResetPlayers();
         }
+
+        private static void ResetPlayers()
+        {
+            Players.Clear();
+
+            Players.Add(new Player(0, 0, 12, 12, PlayerIndex.One));
+            for (int i = 1; i < 4; i++)
+            {
+                if (GamePad.GetState(i).IsConnected)
+                {
+                    Multiplayer = true;
+                    Players.Add(new Player(0, 0, 12, 12, (PlayerIndex)i));
+                }
+            }
+        }
+
+        public static void SetBoundingBoxes(List<Shape> boundingBoxes)
+        {
+            BoundingBoxes = boundingBoxes;
+        }
+
+        public static void AddEntity(Entity e)
+        {
+            EntityBuffer.Add(e);
+        }   
 
         private static void BackToMenu()
         {
@@ -51,17 +84,23 @@ namespace Engine.Engine.Level
             Game1.GameMode = Game1.Mode.MENU;
         }
 
-        private static void CameraHandler()
+        private static void CameraHandler(GameTime gameTime)
         {
-            Camera.Update(CameraLocation, 0, levelWidth, 0, levelHeight);
+            //Console.WriteLine(cameraPanX + " " + cameraPanY);
+            //Console.WriteLine(panDirX + " " + panDirY);           
+
+            Camera.Update();
         }
 
         public static void UpdateInput()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && noSpam)
             {
                 Reset();
+                HUD.Reset();
+                noSpam = false;
             }
+            noSpam = Keyboard.GetState().IsKeyUp(Keys.R) ? true : noSpam;
         }
 
         private static void UpdateEntities(GameTime gameTime)
@@ -71,48 +110,40 @@ namespace Engine.Engine.Level
 
             for (int i = Entities.Count - 1; i >= 0; i--)
             {
-                // Makes it so only entites that are within twice the camera's bounds are updated.
-                if (Entities[i].X < CameraLocation.X - Camera.ScreenBounds.Width || Entities[i].X > CameraLocation.X + Camera.ScreenBounds.Width * 2)
-                    continue;
                 Entities[i].Update(gameTime);
 
                 if (Entities[i].Remove)
                     Entities.RemoveAt(i);
             }
 
-            foreach (Entity e in EntityBuffer)
-                Entities.Add(e);
-
-            EntityBuffer.Clear();
-        }
-
-        // Permanently deletes entites that are offscreen. Useful for a game that has the character always moving right.
-        private static void ClearOffScreen()
-        {
-            for (int i = Entities.Count - 1; i >= 0; i--)
+            if (EntityBuffer.Count > 0)
             {
-                if (Entities[i].X < CameraLocation.X - Camera.ScreenBounds.Width - 64)
-                {
-                    Entities.RemoveAt(i);
-                }
+                foreach (Entity e in EntityBuffer)
+                    Entities.Add(e);
+
+                EntityBuffer.Clear();
             }
+
+            Entities.Sort();
         }
 
         public static void Update(GameTime gameTime)
         {
-            CameraHandler();
+            CameraHandler(gameTime);
             UpdateInput();
-            //ClearOffScreen();
             UpdateEntities(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
+            {
+
+            }
+            spriteBatch.End();
+
             foreach (Entity e in Entities)
             {
-                // Makes it so only entites that are within twice the camera's bounds are drawn.
-                if (e.X < CameraLocation.X - Camera.ScreenBounds.Width || e.X > CameraLocation.X + Camera.ScreenBounds.Width * 2)
-                    continue;
                 e.Draw(spriteBatch);
             }
         }

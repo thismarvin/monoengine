@@ -42,15 +42,15 @@ namespace Engine.Engine.Utilities
 
             switch (textType)
             {
-                case Sprite.Type.TEXT_8x8:
+                case Sprite.Type.Text8x8:
                     textWidth = 7;
                     spacing = 2;
                     break;
-                case Sprite.Type.TEXT_16x16:
+                case Sprite.Type.Text16x16:
                     textWidth = 14;
                     spacing = 4;
                     break;
-                case Sprite.Type.TEXT_19x19:
+                case Sprite.Type.Text19x19:
                     this.dialouge = this.dialouge.ToUpper();
                     textWidth = 14;
                     spacing = 8;
@@ -111,13 +111,13 @@ namespace Engine.Engine.Utilities
                         {
                             switch (textType)
                             {
-                                case Sprite.Type.TEXT_8x8:
+                                case Sprite.Type.Text8x8:
                                     wordLength += 3;
                                     break;
-                                case Sprite.Type.TEXT_16x16:
+                                case Sprite.Type.Text16x16:
                                     wordLength += 6;
                                     break;
-                                case Sprite.Type.TEXT_19x19:
+                                case Sprite.Type.Text19x19:
                                     wordLength += 6;
                                     break;
                             }
@@ -126,13 +126,13 @@ namespace Engine.Engine.Utilities
                         {
                             switch (textType)
                             {
-                                case Sprite.Type.TEXT_8x8:
+                                case Sprite.Type.Text8x8:
                                     wordLength += 5;
                                     break;
-                                case Sprite.Type.TEXT_16x16:
+                                case Sprite.Type.Text16x16:
                                     wordLength += 10;
                                     break;
-                                case Sprite.Type.TEXT_19x19:
+                                case Sprite.Type.Text19x19:
                                     wordLength += 10;
                                     break;
                             }
@@ -141,13 +141,13 @@ namespace Engine.Engine.Utilities
                         {
                             switch (textType)
                             {
-                                case Sprite.Type.TEXT_8x8:
+                                case Sprite.Type.Text8x8:
                                     wordLength += 6;
                                     break;
-                                case Sprite.Type.TEXT_16x16:
+                                case Sprite.Type.Text16x16:
                                     wordLength += 12;
                                     break;
-                                case Sprite.Type.TEXT_19x19:
+                                case Sprite.Type.Text19x19:
                                     wordLength += 12;
                                     break;
                             }

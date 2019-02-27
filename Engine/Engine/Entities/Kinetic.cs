@@ -11,50 +11,45 @@ namespace Engine.Engine.Entities
 {
     abstract class Kinetic : Entity
     {
-        public Vector2 Velocity { get; set; }
+        public Vector2 Velocity { get; private set; }
         public List<Rectangle> CollisionRectangles { get; private set; }
         public float Gravity { get; set; }
-        public float MoveSpeed { get; set; }
+        public float MoveSpeed { private get; set; }
+        protected float Speed { get; private set; }
         public int CollisionWidth { get; private set; }
 
         public enum Direction
-        { LEFT, RIGHT, UP, NONE }
+        { Left, Right, Up, Down, None }
         public Direction Facing { get; set; }
 
         public bool Falling { get; set; }
 
-        public Kinetic(float x, float y, int width, int height, float moveSpeed, Entities type) : base(x, y, width, height, type)
+        public Kinetic(float x, float y, int width, int height, float moveSpeed) : base(x, y, width, height)
         {
             Velocity = Vector2.Zero;
             Gravity = 0.2f;
             MoveSpeed = moveSpeed;
-            Facing = Direction.RIGHT;
+            Facing = Direction.Right;
         }
 
-        protected void ApplyForce()
+        protected void SetVelocity(float x, float y)
         {
-            SetLocation(X + Velocity.X, Y + Velocity.Y);
-            if (Velocity.Y < 3)
-            {
-                Velocity = new Vector2(Velocity.X, Velocity.Y + Gravity);
-            }
-
-            Falling = Velocity.Y > Gravity ? true : false;
+            Velocity = new Vector2(x, y);
         }
 
         protected void UpdateCollisionRectangles()
         {
-            CollisionWidth = (int)MoveSpeed * 2;
+            CollisionWidth = 2;
             CollisionRectangles = new List<Rectangle>()
             {
                 // Rectangle on Top.
                 new Rectangle((int)Location.X + CollisionWidth, (int)Location.Y - CollisionWidth, CollisionRectangle.Width - CollisionWidth * 2, CollisionWidth),
                 // Rectangle on Bottom.
-                new Rectangle((int)Location.X, (int)Location.Y + CollisionRectangle.Height, CollisionRectangle.Width, CollisionWidth + (int)Velocity.Y),
+                new Rectangle((int)Location.X + CollisionWidth, (int)Location.Y + CollisionRectangle.Height, CollisionRectangle.Width - CollisionWidth * 2, CollisionWidth),
                 // Rectangle on Left.
-                new Rectangle((int)Location.X - CollisionWidth, (int)Location.Y /*+ CollisionWidth*/, CollisionWidth, CollisionRectangle.Height /*- CollisionWidth * 2*/),
+                new Rectangle((int)Location.X - CollisionWidth, (int)Location.Y + CollisionWidth, CollisionWidth, CollisionRectangle.Height - CollisionWidth * 2),
                 // Rectangle on Right.
-                new Rectangle((int)Location.X + CollisionRectangle.Width, (int)Location.Y /*+ CollisionWidth*/, CollisionWidth, CollisionRectangle.Height /*- CollisionWidth * 2*/)
+                new Rectangle((int)Location.X + CollisionRectangle.Width, (int)Location.Y + CollisionWidth, CollisionWidth, CollisionRectangle.Height - CollisionWidth * 2)
             };
         }
 
@@ -69,6 +64,12 @@ namespace Engine.Engine.Entities
             }
         }
 
+        protected void CalculateSpeed(GameTime gameTime)
+        {
+            Speed = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
+
+        protected abstract void ApplyForce(GameTime gameTime);
         protected abstract void Collision();
     }
 }

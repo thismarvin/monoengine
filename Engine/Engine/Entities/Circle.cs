@@ -15,49 +15,54 @@ namespace Engine.Engine.Entities
         List<Line> lines;
         public int Radius { get; private set; }
         int lineWidth;
-        const float INCREMENT = (float)Math.PI * 2 / 359;
+        const float INCREMENT = (float)Math.PI * 2 / 360;
 
-        public Circle(float x, float y, int radius) : base(x, y, 1, 1, Entities.CIRCLE)
+        public Circle(float x, float y, int radius) : base(x, y, 1, 1)
         {
             lines = new List<Line>();
             Radius = radius;
             lineWidth = radius;
 
-            CreateCircle();
+            CreateCircle(x, y);
         }
 
         public Circle(float x, float y, int radius, int lineWidth) : this(x, y, radius)
         {
             this.lineWidth = lineWidth;
-            CreateCircle();
+            CreateCircle(x, y);
         }
 
         public Circle(float x, float y, int radius, Color objectColor) : this(x, y, radius)
         {
             ObjectColor = objectColor;
-            CreateCircle();
+            CreateCircle(x, y);
         }
 
         public Circle(float x, float y, int radius, int lineWidth, Color objectColor) : this(x, y, radius)
         {
             this.lineWidth = lineWidth;
             ObjectColor = objectColor;
-            CreateCircle();
+            CreateCircle(x, y);
         }
 
-        private void CreateCircle()
+        private void CreateCircle(float x, float y)
         {
             lines.Clear();
-            for (float i = 0; i < Math.PI; i += INCREMENT)
+            for (float i = 0; i < Math.PI; i += INCREMENT / 2)
             {
-                lines.Add(new Line(X - Radius + CircleX(i), Y + CircleY(i), X - Radius + CircleX(i + INCREMENT), Y + CircleY(i + INCREMENT), lineWidth, ObjectColor));
+                lines.Add(new Line(x - Radius + CircleX(i), y + CircleY(i), x - Radius + CircleX(i + INCREMENT), y + CircleY(i + INCREMENT), lineWidth, ObjectColor));
             }
         }
 
         public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
-            CreateCircle();
+            CreateCircle(x, y);
+        }
+
+        public new void SetCenter(float x, float y)
+        {
+            SetLocation(x, y);
         }
 
         public new void SetCollisionRectangle(float x, float y, int width, int height)
@@ -68,13 +73,13 @@ namespace Engine.Engine.Entities
         public void SetLineWidth(int lineWidth)
         {
             this.lineWidth = lineWidth <= Radius ? lineWidth : Radius;
-            CreateCircle();
+            CreateCircle(X, Y);
         }
 
         public void SetRadius(int radius)
         {
             Radius = radius;
-            CreateCircle();
+            CreateCircle(X, Y);
         }
 
         private float CircleX(float x)
@@ -93,6 +98,7 @@ namespace Engine.Engine.Entities
             {
                 l.Draw(spriteBatch);
             }
+
             if (Game1.DebugMode)
             {
                 spriteBatch.Draw(ShapeManager.Texture, CollisionRectangle, Palette.TreeGreen);

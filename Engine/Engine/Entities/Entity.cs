@@ -16,38 +16,41 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using Engine.Engine.GameComponents;
+using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities
 {
     abstract class Entity : MonoObject, IComparable
     {
+        public Vector2 Center { get; private set; }
         public Rectangle CollisionRectangle { get; private set; }
         public Color ObjectColor { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
         public int LayerDepth { get; set; }
         public bool Remove { get; set; }
-        public Entities Type { get; private set; }
 
-        public enum Entities
-        {
-            PLAYER, SHAPE, CIRCLE, LINE
-        }
-
-        public Entity(float x, float y, int width, int height, Entities type) : base(x, y)
+        public Entity(float x, float y, int width, int height) : base(x, y)
         {
             ObjectColor = Color.White;
             Width = width;
             Height = height;
             LayerDepth = 1;
             CollisionRectangle = new Rectangle((int)X, (int)Y, Width, Height);
-            Type = type;
+            SetCenter(X + Width / 2, Y + Height / 2);
         }
 
         public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
             SetCollisionRectangle(X, Y, Width, Height);
+            SetCenter(X + Width / 2, Y + Height / 2);
+        }
+
+        public void SetCenter(float x, float y)
+        {
+            base.SetLocation(x - Width / 2, y - Height / 2);
+            Center = new Vector2(X + Width / 2, Y + Height / 2);
         }
 
         public void SetCollisionRectangle(float x, float y, int width, int height)

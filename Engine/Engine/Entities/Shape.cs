@@ -18,14 +18,15 @@ namespace Engine.Engine.Entities
 
         public enum Tag
         {
-            NORMAL, ONEWAY, BARRIER
+            None
         }
-        
-        public Shape(float x, float y, int width, int height, Color objectColor) : base(x, y, width, height, Entities.SHAPE)
+
+        public Shape(float x, float y, int width, int height, Color objectColor) : base(x, y, width, height)
         {
             Show = true;
             ObjectColor = objectColor;
             addRectangles = new List<Rectangle>();
+            ID = Tag.None;
             Setup();
         }
 
@@ -45,21 +46,27 @@ namespace Engine.Engine.Entities
             addRectangles.Clear();
             if (lineWidth == 0)
             {
-                addRectangles.Add(new Rectangle((int)Location.X, (int)Location.Y, Width, Height));
+                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, Height * Camera.Scale));
             }
             else
             {
-                addRectangles.Add(new Rectangle((int)Location.X, (int)Location.Y, Width, lineWidth));
-                addRectangles.Add(new Rectangle((int)Location.X, (int)Location.Y + Height - lineWidth, Width, lineWidth));
-                addRectangles.Add(new Rectangle((int)Location.X, (int)Location.Y, lineWidth, Height));
-                addRectangles.Add(new Rectangle((int)Location.X + Width - lineWidth, (int)Location.Y, lineWidth, Height));
+                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, lineWidth * Camera.Scale));
+                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + (Height - lineWidth) * Camera.Scale, Width * Camera.Scale, lineWidth * Camera.Scale));
+                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
+                addRectangles.Add(new Rectangle((int)ScaledLocation.X + Width * Camera.Scale - lineWidth * Camera.Scale, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
             }
         }
 
         public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
-            Setup();        
+            Setup();
+        }
+
+        public new void SetCenter(float x, float y)
+        {
+            base.SetCenter(x, y);
+            Setup();
         }
 
         public new void SetWidth(int width)
@@ -68,7 +75,8 @@ namespace Engine.Engine.Entities
             Setup();
         }
 
-        public new void SetHeight(int height){
+        public new void SetHeight(int height)
+        {
             base.SetHeight(height);
             Setup();
         }

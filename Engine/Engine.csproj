@@ -64,7 +64,6 @@
     <Compile Include="Engine\Utilities\Number.cs" />
     <Compile Include="Engine\Utilities\Palette.cs" />
     <Compile Include="Engine\Utilities\Pinhole.cs" />
-    <Compile Include="Engine\Utilities\SaveManager.cs" />
     <Compile Include="Engine\Utilities\ScreenManager.cs" />
     <Compile Include="Engine\Utilities\ShapeManager.cs" />
     <Compile Include="Engine\Utilities\SoundManager.cs" />

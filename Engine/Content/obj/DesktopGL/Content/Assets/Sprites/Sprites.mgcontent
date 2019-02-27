@@ -3,11 +3,11 @@
   <SourceFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/Sprites.png</SourceFile>
   <SourceTime>2018-06-13T13:57:44.1538965-05:00</SourceTime>
   <DestFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/bin/DesktopGL/Content/Assets/Sprites/Sprites.xnb</DestFile>
-  <DestTime>2019-01-14T08:58:49.7800115-06:00</DestTime>
+  <DestTime>2019-02-27T13:45:43.3649176-06:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-09-23T16:55:52-05:00</ImporterTime>
+  <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-09-23T16:55:52-05:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T10:35:54-06:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

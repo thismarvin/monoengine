@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Engine.GameComponents;
+using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Resources
 {
@@ -13,7 +14,7 @@ namespace Engine.Engine.Resources
         Texture2D spriteSheet;
         Rectangle sourceRectangle;
         Rectangle locationRectangle;
-        public Color ObjectColor { get; set; }
+        public Color ObjectColor { get; private set; }
         public Vector2 Center { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -24,14 +25,15 @@ namespace Engine.Engine.Resources
         public SpriteEffects Effect { get; set; }
         public Type CurrentSprite { get; private set; }
         public Tag ID { get; set; }
+        Vector2 scale;
 
         public enum Type
         {
-            AMSQUAREDLOGO,
-            TEXT_8x8, COLON8,
-            TEXT_16x16, COLON16,
-            TEXT_19x19,
-            NONE
+            Text8x8, Colon8,
+            Text16x16, Colon16,
+            Text19x19,
+
+            None
         }
 
         public enum Tag
@@ -47,7 +49,7 @@ namespace Engine.Engine.Resources
             Rotation = 0;
             Show = true;
             CurrentSprite = sprite;
-
+            scale = new Vector2(Camera.Scale, Camera.Scale);
             InitializeSprite();
         }
 
@@ -60,41 +62,34 @@ namespace Engine.Engine.Resources
         {
             switch (CurrentSprite)
             {
-                // How to initialize a Sprite.
-                //case Type.NAME_DEFINED_IN_TYPE_ENUM:
-                //        SpriteSetup(SPRITES TOPLEFT X POSITION IN SPRITESHEET, SPRITES TOPLEFT Y POSITION IN SPRITESHEET, SPRITES WIDTH, SPRITES HEIGHT);
-                //break;
-
-                #region Logo
-                case Type.AMSQUAREDLOGO:
-                    SpriteSetup(0, 0, 45, 29);
-                    break;
-                #endregion
-
                 #region Text
-                case Type.TEXT_8x8:
+                case Type.Text8x8:
                     SpriteSetup(0, 0, 8, 8);
                     spriteSheet = Assets.Text8x8;
                     break;
-                case Type.COLON8:
+                case Type.Colon8:
                     SpriteSetup(0, 0, 8, 8);
                     ChangeInto(":");
                     spriteSheet = Assets.Text8x8;
                     break;
-                case Type.TEXT_16x16:
+                case Type.Text16x16:
                     SpriteSetup(0, 0, 16, 16);
                     spriteSheet = Assets.Text16x16;
                     break;
-                case Type.COLON16:
+                case Type.Colon16:
                     SpriteSetup(0, 0, 16, 16);
                     ChangeInto(":");
                     spriteSheet = Assets.Text16x16;
                     break;
-                case Type.TEXT_19x19:
+                case Type.Text19x19:
                     SpriteSetup(0, 0, 19, 19);
                     spriteSheet = Assets.Text19x19;
                     break;
-                    #endregion
+                #endregion
+
+                case Type.None:
+                    SpriteSetup(0, 0, 0, 0);
+                    break;
             }
             sourceRectangle = new Rectangle(frameX, frameY, Width, Height);
         }
@@ -110,6 +105,13 @@ namespace Engine.Engine.Resources
         public void IncrementFrame(int increment)
         {
             frameX += increment * Width;
+            sourceRectangle = new Rectangle(frameX, frameY, Width, Height);
+        }
+
+        public void SetFrame(int frame)
+        {
+            InitializeSprite();
+            frameX += frame * Width;
             sourceRectangle = new Rectangle(frameX, frameY, Width, Height);
         }
 
@@ -129,6 +131,11 @@ namespace Engine.Engine.Resources
             Center = new Vector2(xOffset, yOffset);
         }
 
+        public void SetScale(float scale)
+        {
+            this.scale = new Vector2(scale * Camera.Scale, scale * Camera.Scale);
+        }
+
         // Used for Text / Number Class!
         public void ChangeInto(string value)
         {
@@ -144,7 +151,7 @@ namespace Engine.Engine.Resources
 
             if (Show)
             {
-                spriteBatch.Draw(spriteSheet, locationRectangle, sourceRectangle, ObjectColor, Rotation, Center, Effect, 0);
+                spriteBatch.Draw(spriteSheet, ScaledLocation, sourceRectangle, ObjectColor, Rotation, Center, scale, Effect, Y);
             }
         }
     }

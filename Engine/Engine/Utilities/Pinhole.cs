@@ -13,50 +13,59 @@ namespace Engine.Engine.Utilities
     class Pinhole : MonoObject
     {
         Circle center;
-        float increment;
+
+        float velocity;
+        float speed;
+        int dir;
+        float acceleration;
+        float scaledAcceleration;
         bool done;
+        int frameIndex;
+
         Type type;
+
         public enum Type
         {
-            OPEN, CLOSED
+            Open, Closed
         }
 
-        public Pinhole(float x, float y, Type type) : base (x,y)
+        public Pinhole(float x, float y, Type type) : base(x, y)
         {
             this.type = type;
+            speed = 1000;
+            acceleration = 100;
 
             switch (type)
             {
-                case Type.CLOSED:
-                    center = new Circle(X, Y, -400, 400, Color.Black);
-                    increment = -3;
+                case Type.Closed:
+                    center = new Circle(X, Y, -1000 * Camera.Scale, 1000 * Camera.Scale, Color.Black);
+                    dir = 1;
                     break;
-                case Type.OPEN:
-                    center = new Circle(X, Y, 400, 400, Color.Black);
-                    increment = 3;
+                case Type.Open:
+                    center = new Circle(X, Y, 1000 * Camera.Scale, 1000 * Camera.Scale, Color.Black);
+                    dir = 1;
                     break;
             }
         }
 
-        public new void SetLocation(float x,float y)
+        public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
+            frameIndex = 0;
             switch (type)
             {
-                case Type.CLOSED:
-                    center = new Circle(X, Y, -400, 400, Color.Black);
-                    increment = -3;
+                case Type.Closed:
+                    center.SetLocation(X, Y);
                     break;
-                case Type.OPEN:
-                    center = new Circle(X, Y, 400, 400, Color.Black);
-                    increment = 3;
+                case Type.Open:
+                    center.SetLocation(X, Y);
                     break;
             }
         }
 
         public void SetSpeed(float speed)
         {
-            increment = increment < 0 ? -speed : speed;
+            velocity = velocity < 0 ? -speed : speed;
         }
 
         public void Update(GameTime gameTime)
@@ -64,34 +73,19 @@ namespace Engine.Engine.Utilities
             if (done)
                 return;
 
-            switch (type)
-            {
-                case Type.OPEN:
-                    if (center.Radius < Camera.ScreenBounds.Width * 2 && !done)
-                    {
-                        center.SetRadius(center.Radius + (int)increment);
-                        increment += 0.15f;
-                    }
-                    else
-                    {
-                        center.SetRadius(0);
-                        done = true;
-                    }
+            scaledAcceleration = acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                    break;
-                case Type.CLOSED:
-                    if (center.Radius > -Camera.ScreenBounds.Width * 2 && !done)
-                    {
-                        center.SetRadius(center.Radius + (int)increment);
-                        increment -= 0.15f;
-                    }
-                    else
-                    {
-                        center.SetRadius(0);
-                        done = true;
-                    }
-                    break;
+            if ((type == Type.Open && center.Radius < 1000 * Camera.Scale + 1000) || (type == Type.Closed && center.Radius < 0))
+            {
+                velocity = (scaledAcceleration * frameIndex + speed * dir) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                center.SetRadius(center.Radius + (int)velocity);
             }
+            else
+            {
+                center.SetRadius(0);
+                done = true;
+            }
+            frameIndex++;
         }
 
         public void Draw(SpriteBatch spriteBatch)

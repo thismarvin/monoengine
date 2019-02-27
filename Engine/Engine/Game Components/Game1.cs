@@ -32,17 +32,15 @@ namespace Engine.Engine.GameComponents
         public static bool DebugMode { get; set; }
         bool released;
 
-        public static SaveManager Save { get; private set; }
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            title = "Mono Engine";
+            title = "UberCoolCustomCraftedMonoGameEngine";
 
             // Toggle Mouse Visibility.
-            IsMouseVisible = true;
+            IsMouseVisible = false;
 
             int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
@@ -50,31 +48,58 @@ namespace Engine.Engine.GameComponents
             GameOrientation = Orientation.LANDSCAPE;
             GameMode = Mode.PLAYFIELD;
 
-            defaultWindowWidth = 1280;
-            defaultWindowHeight = 720;
-            
+            defaultWindowWidth = 480 * 2;
+            defaultWindowHeight = 270 * 2;
+
             // Set Screen Dimensions.
             graphics.PreferredBackBufferWidth = defaultWindowWidth;
             graphics.PreferredBackBufferHeight = defaultWindowHeight;
 
-            // Toggle VSync.
-            //graphics.SynchronizeWithVerticalRetrace = false;
-            //base.IsFixedTimeStep = false;
+            EnableVSync(false);
+            SetTargetFPS(500);
 
             graphics.ApplyChanges();
         }
 
+        private void EnableVSync(bool vsync)
+        {
+            if (vsync)
+            {
+                graphics.SynchronizeWithVerticalRetrace = true;
+                base.IsFixedTimeStep = false;
+            }
+        }
+
+        private void SetTargetFPS(int fps)
+        {
+            TargetElapsedTime = TimeSpan.FromTicks((long)(1f / fps * 10000000));
+        }
+
+        private void DebugModeToggle()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.F12) && released)
+            {
+                DebugMode = !DebugMode;
+                released = false;
+            }
+            if (!released && Keyboard.GetState().IsKeyUp(Keys.F12)) { released = true; }
+            if (DebugMode) { Window.Title = title + " " + Math.Round(ScreenManager.FPS) + " FPS"; }
+            else { Window.Title = title; }
+        }
+
+        private void ExitGameLogic()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { ExitGame = true; }
+            if (ExitGame) { Exit(); }
+        }
+
         protected override void Initialize()
         {
-            ShapeManager.Initialize(graphics);           
+            ShapeManager.Initialize(graphics);
             ScreenManager.Initialize(defaultWindowWidth, defaultWindowHeight);
-
             Camera.Initialize();
             StaticCamera.Initialize();
 
-            // Start Game FullScreen.
-            //ScreenManager.StartFullScreen(graphics);         
-            
             base.Initialize();
         }
 
@@ -85,8 +110,11 @@ namespace Engine.Engine.GameComponents
             Assets.LoadContent(Content);
 
             SoundManager.Initialize();
-            HUD.Initialize();
             Playfield.Initialize();
+            HUD.Initialize();
+
+            // Start Game FullScreen.
+            //ScreenManager.StartFullScreen(graphics);
         }
 
         protected override void UnloadContent()
@@ -99,23 +127,10 @@ namespace Engine.Engine.GameComponents
 
         protected override void Update(GameTime gameTime)
         {
-            #region Debug Toggle
-            if (Keyboard.GetState().IsKeyDown(Keys.F12) && released)
-            {
-                DebugMode = !DebugMode;
-                released = false;       
-            }
-            if (!released && Keyboard.GetState().IsKeyUp(Keys.F12)) { released = true; }
-            if (DebugMode) { Window.Title = title + " " + Math.Round(ScreenManager.FPS) + " FPS"; }
-            else { Window.Title = title; }
-            #endregion
-
-            #region Exit
-            if (ExitGame) { Exit(); }
-            #endregion
+            ExitGameLogic();
+            DebugModeToggle();
 
             ScreenManager.Update(gameTime, graphics);
-            Playfield.Update(gameTime);
 
             switch (GameMode)
             {
@@ -134,28 +149,13 @@ namespace Engine.Engine.GameComponents
         {
             GraphicsDevice.Clear(Palette.SkyBlue);
 
-            // Dynamic Camera.
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
             switch (GameMode)
             {
                 case Mode.PLAYFIELD:
                     Playfield.Draw(spriteBatch);
-                    break;
-            }
-            spriteBatch.End();
-
-            // Static Camera.
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, StaticCamera.Transform);
-            switch (GameMode)
-            {
-                case Mode.MENU:
-                    break;
-                case Mode.PLAYFIELD:
                     HUD.Draw(spriteBatch);
                     break;
-            }                    
-            StaticCamera.Draw(spriteBatch);
-            spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

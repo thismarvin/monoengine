@@ -3,11 +3,11 @@
   <SourceFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/Assets/Sprites/ASCII 8.png</SourceFile>
   <SourceTime>2017-10-21T16:40:34-05:00</SourceTime>
   <DestFile>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Engine/monoengine/Engine/Content/bin/DesktopGL/Content/Assets/Sprites/ASCII 8.xnb</DestFile>
-  <DestTime>2019-01-14T08:58:49.7417642-06:00</DestTime>
+  <DestTime>2019-02-27T13:45:43.3253878-06:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-09-23T16:55:52-05:00</ImporterTime>
+  <ImporterTime>2018-12-08T10:35:54-06:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-09-23T16:55:52-05:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T10:35:54-06:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

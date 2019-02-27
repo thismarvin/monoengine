@@ -25,13 +25,23 @@ namespace Engine.Engine.Utilities
         public static Color TreeGreen = new Color(0, 135, 81);
         public static Color GrassGreen = new Color(0, 231, 86);
 
+        // Nes Patlette.
+        public static Color RadiantRed = new Color(228, 0, 88);
+        public static Color RedDelicious = new Color(168, 0, 32);
+        public static Color PoliceBlue = new Color(0, 120, 248);
+        public static Color GrapePurple = new Color(104, 68, 252);
+        public static Color GreedGreen = new Color(0, 168, 68);
+        public static Color GreenishBlue = new Color(0, 64, 88);
+        public static Color OrangeOrange = new Color(248, 56, 0);
+
         // GrafxKid Palette.
         public static Color GhostWhite = new Color(250, 246, 238);
         public static Color DirtyWater = new Color(0, 171, 196);
 
         // Misc.
         public static Color CheckerBoard = new Color(0, 0, 0, 100);
+        public static Color DoctorBlue = new Color(0, 136, 136);
 
-        public static Color[] Rainbow = new Color[] { OceanBlue, DarkPurple, LightPurple, BloodRed, FleshPink, ConeOrange, TaxiYellow, TreeGreen, GrassGreen }; 
+        public static Color[] Rainbow = new Color[] { OceanBlue, DarkPurple, LightPurple, BloodRed, FleshPink, ConeOrange, TaxiYellow, TreeGreen, GrassGreen };
     }
 }
