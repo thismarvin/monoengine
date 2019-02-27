@@ -87,7 +87,7 @@ namespace Engine.Engine.Level
             Camera.Update();
         }
 
-        public static void UpdateInput()
+        private static void UpdateInput()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.R) && noSpam)
             {
