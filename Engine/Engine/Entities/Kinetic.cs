@@ -13,6 +13,7 @@ namespace Engine.Engine.Entities
     {
         public Vector2 Velocity { get; private set; }
         public List<Rectangle> CollisionRectangles { get; private set; }
+          public List<Rectangle> ScaledCollisionRectangles { get; private set; }
         public float Gravity { get; set; }
         public float MoveSpeed { private get; set; }
         protected float Speed { get; private set; }
@@ -39,6 +40,19 @@ namespace Engine.Engine.Entities
 
         protected void UpdateCollisionRectangles()
         {
+            CollisionWidth = 2 * Camera.Scale;
+            ScaledCollisionRectangles = new List<Rectangle>()
+            {
+                // Rectangle on Top.
+                new Rectangle((int)ScaledLocation.X + CollisionWidth, (int)ScaledLocation.Y - CollisionWidth, ScaledCollisionRectangle.Width - CollisionWidth * 2, CollisionWidth),
+                // Rectangle on Bottom.
+                new Rectangle((int)ScaledLocation.X + CollisionWidth, (int)ScaledLocation.Y + ScaledCollisionRectangle.Height, ScaledCollisionRectangle.Width - CollisionWidth * 2, CollisionWidth),
+                // Rectangle on Left.
+                new Rectangle((int)ScaledLocation.X - CollisionWidth, (int)ScaledLocation.Y + CollisionWidth, CollisionWidth, ScaledCollisionRectangle.Height - CollisionWidth * 2),
+                // Rectangle on Right.
+                new Rectangle((int)ScaledLocation.X + ScaledCollisionRectangle.Width, (int)ScaledLocation.Y + CollisionWidth, CollisionWidth, ScaledCollisionRectangle.Height - CollisionWidth * 2)
+            };
+
             CollisionWidth = 2;
             CollisionRectangles = new List<Rectangle>()
             {
@@ -57,8 +71,8 @@ namespace Engine.Engine.Entities
         {
             if (CollisionRectangles == null)
                 return;
-            spriteBatch.Draw(ShapeManager.Texture, CollisionRectangle, ObjectColor);
-            foreach (Rectangle r in CollisionRectangles)
+            spriteBatch.Draw(ShapeManager.Texture, ScaledCollisionRectangle, ObjectColor);
+            foreach (Rectangle r in ScaledCollisionRectangles)
             {
                 spriteBatch.Draw(ShapeManager.Texture, r, Color.Red);
             }

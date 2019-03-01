@@ -24,6 +24,7 @@ namespace Engine.Engine.Entities
     {
         public Vector2 Center { get; private set; }
         public Rectangle CollisionRectangle { get; private set; }
+        public Rectangle ScaledCollisionRectangle { get { return new Rectangle(CollisionRectangle.X * Camera.Scale, CollisionRectangle.Y * Camera.Scale, Width * Camera.Scale, Height * Camera.Scale); } }
         public Color ObjectColor { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -36,8 +37,9 @@ namespace Engine.Engine.Entities
             Width = width;
             Height = height;
             LayerDepth = 1;
-            CollisionRectangle = new Rectangle((int)X, (int)Y, Width, Height);
+           
             SetCenter(X + Width / 2, Y + Height / 2);
+            SetCollisionRectangle(X, Y, Width, Height);
         }
 
         public new void SetLocation(float x, float y)
