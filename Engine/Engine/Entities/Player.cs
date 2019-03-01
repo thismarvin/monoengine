@@ -28,6 +28,7 @@ namespace Engine.Engine.Entities
             input = new Input(playerIndex);
            
             Health = 6;
+            MoveSpeed = 100;
         }
 
         public new void SetLocation(float x, float y)
@@ -152,7 +153,6 @@ namespace Engine.Engine.Entities
             UpdateInput(gameTime);
             UpdateCollisionRectangles();
             Collision();
-
             UpdateAnimation(gameTime);
             LayerDepth = (int)Y + Height;
         }

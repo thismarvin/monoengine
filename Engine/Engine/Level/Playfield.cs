@@ -36,6 +36,7 @@ namespace Engine.Engine.Level
             Entities = new List<Entity>();
             EntityBuffer = new List<Entity>();
             Players = new List<Player>();
+            BoundingBoxes = new List<Shape>();
             RNG = new Random(DateTime.Now.Millisecond);
             Reset();
         }
@@ -60,6 +61,11 @@ namespace Engine.Engine.Level
                     Multiplayer = true;
                     Players.Add(new Player(0, 0, 12, 12, (PlayerIndex)i));
                 }
+            }
+
+            foreach (Player p in Players)
+            {
+                Entities.Add(p);
             }
         }
 

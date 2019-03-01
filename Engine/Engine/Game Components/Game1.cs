@@ -25,7 +25,7 @@ namespace Engine.Engine.GameComponents
         public static Mode GameMode { get; set; }
 
         public enum Orientation
-        { LANDSCAPE, PORTRAIT }
+        { Landscape, Portrait }
         public static Orientation GameOrientation { get; set; }
 
         public static bool ExitGame { get; set; }
@@ -45,7 +45,7 @@ namespace Engine.Engine.GameComponents
             int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            GameOrientation = Orientation.LANDSCAPE;
+            GameOrientation = Orientation.Landscape;
             GameMode = Mode.PLAYFIELD;
 
             defaultWindowWidth = 480 * 2;

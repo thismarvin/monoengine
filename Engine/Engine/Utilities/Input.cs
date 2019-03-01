@@ -62,13 +62,13 @@ namespace Engine.Engine.Utilities
 
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     DynamicCursorLocation = new Vector2(MouseState.X / Camera.Zoom + Camera.TopLeft.X, MouseState.Y / Camera.Zoom - StaticCamera.VerticalLetterBox + Camera.TopLeft.Y);
                     DynamicCollisionRectangle = new Rectangle((int)DynamicCursorLocation.X, (int)DynamicCursorLocation.Y, 1, 1);
                     StaticCursorLocation = new Vector2(MouseState.X / StaticCamera.Zoom - StaticCamera.HorizontalLetterBox, MouseState.Y / StaticCamera.Zoom - StaticCamera.VerticalLetterBox);
                     StaticCollisionRectangle = new Rectangle((int)StaticCursorLocation.X, (int)StaticCursorLocation.Y, 1, 1); ;
                     break;
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     DynamicCursorLocation = new Vector2(MouseState.X / Camera.Zoom + Camera.TopLeft.X - StaticCamera.VerticalLetterBox, MouseState.Y / Camera.Zoom + Camera.TopLeft.Y);
                     DynamicCollisionRectangle = new Rectangle((int)DynamicCursorLocation.X, (int)DynamicCursorLocation.Y, 1, 1);
                     StaticCursorLocation = new Vector2(MouseState.X / StaticCamera.Zoom - StaticCamera.VerticalLetterBox, MouseState.Y / StaticCamera.Zoom - StaticCamera.VerticalLetterBox);

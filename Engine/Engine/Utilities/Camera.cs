@@ -31,7 +31,7 @@ namespace Engine.Engine.Utilities
 
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     ScreenBounds = new Rectangle(0, 0, longSide, shortSide);
                     Zoom = windowHeight / (float)ScreenBounds.Height;
                     if (ScreenBounds.Width * Zoom > windowWidth)
@@ -48,7 +48,7 @@ namespace Engine.Engine.Utilities
                     RealScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     ScreenBounds = new Rectangle(0, 0, shortSide, longSide);
                     Zoom = windowWidth / (float)ScreenBounds.Width;
                     RealScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
@@ -62,10 +62,10 @@ namespace Engine.Engine.Utilities
 
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     FinalizeLanscapeMatrix();
                     break;
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     FinalizePortraitMatrix();
                     break;
             }
@@ -80,10 +80,10 @@ namespace Engine.Engine.Utilities
 
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     FinalizeLanscapeMatrix();
                     break;
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     FinalizePortraitMatrix();
                     break;
             }

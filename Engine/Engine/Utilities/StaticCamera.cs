@@ -25,10 +25,10 @@ namespace Engine.Engine.Utilities
         {
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
                     break;
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
                     break;
             }
@@ -81,11 +81,11 @@ namespace Engine.Engine.Utilities
             ResetZoom();
             switch (Game1.GameOrientation)
             {
-                case Game1.Orientation.LANDSCAPE:
+                case Game1.Orientation.Landscape:
                     SetupLandscapeLetterBox(windowWidth, windowHeight);
                     FinalizeLanscapeMatrix();
                     break;
-                case Game1.Orientation.PORTRAIT:
+                case Game1.Orientation.Portrait:
                     SetupPortraitLetterBox(windowWidth);
                     FinalizePortraitMatrix();
                     break;
@@ -97,7 +97,7 @@ namespace Engine.Engine.Utilities
             topLetterBox.Draw(spriteBatch);
             bottomLetterBox.Draw(spriteBatch);
 
-            if (!ScreenManager.WideScreenSupport && Game1.GameOrientation == Game1.Orientation.LANDSCAPE)
+            if (!ScreenManager.WideScreenSupport && Game1.GameOrientation == Game1.Orientation.Landscape)
             {
                 leftLetterBox.Draw(spriteBatch);
                 rightLetterBox.Draw(spriteBatch);
