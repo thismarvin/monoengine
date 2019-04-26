@@ -12,7 +12,6 @@ namespace Engine.Engine.Utilities
     {
         public static float Zoom { get; set; }
         public static Rectangle ScreenBounds { get; private set; }
-        public static Rectangle RealScreenBounds { get; private set; }
         public static Matrix Transform { get; private set; }
         public static Vector2 TopLeft;
 
@@ -32,26 +31,24 @@ namespace Engine.Engine.Utilities
             switch (Game1.GameOrientation)
             {
                 case Game1.Orientation.Landscape:
-                    ScreenBounds = new Rectangle(0, 0, longSide, shortSide);
-                    Zoom = windowHeight / (float)ScreenBounds.Height;
-                    if (ScreenBounds.Width * Zoom > windowWidth)
+                    Zoom = windowHeight / shortSide;
+                    if (longSide * Zoom > windowWidth)
                     {
-                        Zoom = windowWidth / (float)ScreenBounds.Width;
+                        Zoom = windowWidth / longSide;
                     }
-                    else if (ScreenBounds.Width * Zoom < windowWidth)
+                    else if (longSide * Zoom < windowWidth)
                     {
                         if (ScreenManager.WideScreenSupport)
                         {
-                            longSide = (int)((windowWidth - ScreenBounds.Width * Zoom) / Zoom) + ScreenBounds.Width;
+                            longSide = (int)((windowWidth - longSide * Zoom) / Zoom) + longSide;
                         }
                     }
-                    RealScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
+                    ScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
                 case Game1.Orientation.Portrait:
-                    ScreenBounds = new Rectangle(0, 0, shortSide, longSide);
-                    Zoom = windowWidth / (float)ScreenBounds.Width;
-                    RealScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
+                    Zoom = windowWidth / longSide;
+                    ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
             }
         }

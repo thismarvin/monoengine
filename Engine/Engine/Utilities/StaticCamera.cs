@@ -40,23 +40,23 @@ namespace Engine.Engine.Utilities
 
         private static void SetupLandscapeLetterBox(int windowWidth, int windowHeight)
         {
-            VerticalLetterBox = (windowHeight / Zoom - Camera.ScreenBounds.Height) / 2;
-            topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.RealScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
-            bottomLetterBox = new Shape(-128, Camera.RealScreenBounds.Height, Camera.RealScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
+            VerticalLetterBox = (windowHeight / Zoom - Camera.ScreenBounds.Height * Camera.Scale) / 2;
+            topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
+            bottomLetterBox = new Shape(-128, Camera.ScreenBounds.Height, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
 
             if (!ScreenManager.WideScreenSupport)
             {
                 HorizontalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width) / 2;
-                leftLetterBox = new Shape(-128 - (int)HorizontalLetterBox, -128, 128 + (int)HorizontalLetterBox, Camera.RealScreenBounds.Height + 128 * 2, Color.Black);
-                rightLetterBox = new Shape(Camera.RealScreenBounds.Width, -128, (int)HorizontalLetterBox + 128, Camera.RealScreenBounds.Height + 128 * 2, Color.Black);
+                leftLetterBox = new Shape(-128 - (int)HorizontalLetterBox, -128, 128 + (int)HorizontalLetterBox, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
+                rightLetterBox = new Shape(Camera.ScreenBounds.Width, -128, (int)HorizontalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
             }
         }
 
         private static void SetupPortraitLetterBox(int windowWidth)
         {
             VerticalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width) / 2;
-            topLetterBox = new Shape(-(int)VerticalLetterBox - 128, -128, (int)VerticalLetterBox + 128, Camera.RealScreenBounds.Height + 128 * 2, Color.Black);
-            bottomLetterBox = new Shape(Camera.RealScreenBounds.Width, -128, (int)VerticalLetterBox + 128, Camera.RealScreenBounds.Height + 128 * 2, Color.Black);
+            topLetterBox = new Shape(-(int)VerticalLetterBox - 128, -128, (int)VerticalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
+            bottomLetterBox = new Shape(Camera.ScreenBounds.Width, -128, (int)VerticalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
         }
 
         private static void FinalizeLanscapeMatrix()

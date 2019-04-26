@@ -22,7 +22,7 @@ namespace Engine.Engine.Level
 
         public static void Reset()
         {
-            pinhole = new Pinhole(Camera.RealScreenBounds.Width / 2, Camera.RealScreenBounds.Height / 2, Pinhole.Type.Open);
+            pinhole = new Pinhole(Camera.ScreenBounds.Width / 2, Camera.ScreenBounds.Height / 2, Pinhole.Type.Open);
         }
 
         public static void Update(GameTime gameTime)
