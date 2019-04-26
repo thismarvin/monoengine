@@ -31,7 +31,7 @@ namespace Engine.Engine.Utilities
             switch (Game1.GameOrientation)
             {
                 case Game1.Orientation.Landscape:
-                    Zoom = windowHeight / shortSide;
+                    Zoom = (float)windowHeight / shortSide;
                     if (longSide * Zoom > windowWidth)
                     {
                         Zoom = windowWidth / longSide;
@@ -47,7 +47,7 @@ namespace Engine.Engine.Utilities
                     break;
 
                 case Game1.Orientation.Portrait:
-                    Zoom = windowWidth / longSide;
+                    Zoom = (float)windowWidth / longSide;
                     ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
             }
@@ -60,7 +60,7 @@ namespace Engine.Engine.Utilities
             switch (Game1.GameOrientation)
             {
                 case Game1.Orientation.Landscape:
-                    FinalizeLanscapeMatrix();
+                    FinalizeLandscapeMatrix();
                     break;
                 case Game1.Orientation.Portrait:
                     FinalizePortraitMatrix();
@@ -78,7 +78,7 @@ namespace Engine.Engine.Utilities
             switch (Game1.GameOrientation)
             {
                 case Game1.Orientation.Landscape:
-                    FinalizeLanscapeMatrix();
+                    FinalizeLandscapeMatrix();
                     break;
                 case Game1.Orientation.Portrait:
                     FinalizePortraitMatrix();
@@ -108,7 +108,7 @@ namespace Engine.Engine.Utilities
             TopLeft.Y = (TopLeft.Y + ScreenBounds.Height > maxHeight ? maxHeight - ScreenBounds.Height : TopLeft.Y);
         }
 
-        private static void FinalizeLanscapeMatrix()
+        private static void FinalizeLandscapeMatrix()
         {
             // Fixed on Top Left.
             Transform = Matrix.CreateTranslation(new Vector3(-TopLeft.X + StaticCamera.HorizontalLetterBox, -TopLeft.Y + StaticCamera.VerticalLetterBox, 0)) *
