@@ -67,7 +67,7 @@ namespace Engine.Engine.Entities.Geometry
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ShapeManager.Texture, new Vector2(origin.X, origin.Y), null, ObjectColor, rotation, Vector2.Zero, new Vector2(distance, thickness), SpriteEffects.None, 0);
+            spriteBatch.Draw(ShapeManager.Texture, new Vector2(origin.X * Camera.Scale, origin.Y * Camera.Scale), null, ObjectColor, rotation, Vector2.Zero, new Vector2(distance * Camera.Scale, thickness * Camera.Scale), SpriteEffects.None, 0);
         }
 
         public override void Update(GameTime gameTime)

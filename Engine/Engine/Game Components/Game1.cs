@@ -16,7 +16,7 @@ namespace Engine.Engine.GameComponents
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        String title;
+        string title;
         int defaultWindowHeight;
         int defaultWindowWidth;
 

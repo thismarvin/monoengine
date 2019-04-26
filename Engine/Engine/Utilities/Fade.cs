@@ -41,7 +41,7 @@ namespace Engine.Engine.Utilities
                 fade = new Color(0, 0, 0, 0);
             }
 
-            shape = new Shape(X, Y, Camera.RealScreenBounds.Width, Camera.RealScreenBounds.Height, fade);
+            shape = new Shape(X - 32, Y - 32, Camera.RealScreenBounds.Width + 64, Camera.RealScreenBounds.Height + 64, fade);
         }
 
         private void FadeLogic(GameTime gameTime)

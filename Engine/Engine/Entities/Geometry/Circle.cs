@@ -23,26 +23,26 @@ namespace Engine.Engine.Entities.Geometry
             Radius = radius;
             lineWidth = radius;
 
-            CreateCircle(x, y);
+            CreateCircle(X, Y);
         }
 
         public Circle(float x, float y, int radius, int lineWidth) : this(x, y, radius)
         {
             this.lineWidth = lineWidth;
-            CreateCircle(x, y);
+            CreateCircle(X, Y);
         }
 
         public Circle(float x, float y, int radius, Color objectColor) : this(x, y, radius)
         {
             ObjectColor = objectColor;
-            CreateCircle(x, y);
+            CreateCircle(X, Y);
         }
 
         public Circle(float x, float y, int radius, int lineWidth, Color objectColor) : this(x, y, radius)
         {
             this.lineWidth = lineWidth;
             ObjectColor = objectColor;
-            CreateCircle(x, y);
+            CreateCircle(X, Y);
         }
 
         private void CreateCircle(float x, float y)
@@ -57,7 +57,7 @@ namespace Engine.Engine.Entities.Geometry
         public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
-            CreateCircle(x, y);
+            CreateCircle(X, Y);
         }
 
         public new void SetCenter(float x, float y)

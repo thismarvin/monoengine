@@ -32,7 +32,7 @@ namespace Engine.Engine.Utilities
         public Pinhole(float x, float y, Type type) : base(x, y)
         {
             this.type = type;
-            speed = 1000;
+            speed = 500;
             acceleration = 100;
 
             switch (type)

@@ -72,7 +72,7 @@ namespace Engine.Engine.Utilities
             {
                 if (test >= 0)
                 {
-                    sprites[i].ChangeInto(value.ToString().Substring(test, 1));
+                    sprites[i].SetFrame(value.ToString().Substring(test, 1).ToCharArray()[0], 16);
                     test--;
                 }
             }
@@ -83,7 +83,7 @@ namespace Engine.Engine.Utilities
         {
             foreach (Sprite s in sprites)
             {
-                s.ChangeInto("0");
+                s.SetFrame("0".ToCharArray()[0], 16);
             }
         }
 

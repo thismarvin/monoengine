@@ -18,28 +18,52 @@ namespace Engine.Engine.Utilities
         List<Sprite> sprites;
         Timer timer;
         Sprite.Type textType;
-        int textWidth;
+        float textWidth;
         int maximumCharacterCount;
-        int spacing;
-        string dialouge;
+        float spacing;
+        public string Dialogue { get; private set; }
         bool showAll;
-
-        //TimeManager Timer_Effect;
-        //int EffectHelper;
-        //int EffectIndex;
-
+        float scale;    
         bool compact;
 
-        public Text(float x, float y, string dialouge, int maximumCharacterCount, float textSpeed, Sprite.Type textType) : base(x, y)
+        public Text(float x, float y, string text, Sprite.Type type) : base(x, y)
         {
             words = new List<string>();
             sprites = new List<Sprite>();
+            timer = new Timer(0);
 
-            this.maximumCharacterCount = maximumCharacterCount;
-            this.dialouge = dialouge;
-            this.textType = textType;
+            Dialogue = text;
+            textType = type;
+            maximumCharacterCount = text.Length * 2;
             compact = true;
+            showAll = true;
+            scale = 1;
 
+            BreakUpWords();
+            CreateText();
+        }
+
+        public Text(float x, float y, string text, Sprite.Type type, float scale) : this(x, y, text, type)
+        {
+            this.scale = scale;
+            CreateText();
+        }
+
+        public Text(float x, float y, string text, Sprite.Type type, int maximumCharacterCount, float textSpeed) : this(x, y, text, type)
+        {
+            this.maximumCharacterCount = maximumCharacterCount;
+            showAll = textSpeed <= 0 ? true : false;
+            CreateText();
+        }
+
+        public Text(float x, float y, string text, Sprite.Type type, int maximumCharacterCount, float textSpeed, float scale) : this(x, y, text, type, maximumCharacterCount, textSpeed)
+        {
+            this.scale = scale;
+            CreateText();
+        }
+
+        private void TextSetup()
+        {
             switch (textType)
             {
                 case Sprite.Type.Text8x8:
@@ -51,33 +75,41 @@ namespace Engine.Engine.Utilities
                     spacing = 4;
                     break;
                 case Sprite.Type.Text19x19:
-                    this.dialouge = this.dialouge.ToUpper();
+                    Dialogue = Dialogue.ToUpper();
                     textWidth = 14;
                     spacing = 8;
                     break;
             }
 
-            SetLocation(X - textWidth, Y);
+            textWidth *= scale;
+            spacing *= scale;
 
-            timer = new Timer(textSpeed);
-
-            showAll = textSpeed <= 0 ? true : false;
-
-            BreakUpWords();
-            CreateText();
         }
 
         public void SetCompact(bool compact)
         {
             this.compact = compact;
-            sprites.Clear();
+            CreateText();
+        }
+
+        public void SetScale(float scale)
+        {
+            this.scale = scale;
+            CreateText();
+        }
+
+        public void SetText(string text)
+        {
+            Dialogue = text;
+            BreakUpWords();
             CreateText();
         }
 
         private void BreakUpWords()
         {
-            String[] wordsArray = Regex.Split(dialouge, "[ ]+");
-            foreach (String s in wordsArray)
+            words.Clear();
+            string[] wordsArray = Regex.Split(Dialogue, "[ ]+");
+            foreach (string s in wordsArray)
             {
                 words.Add(s);
             }
@@ -85,9 +117,12 @@ namespace Engine.Engine.Utilities
 
         private void CreateText()
         {
+            sprites.Clear();
+            TextSetup();
+
             int dialougeIndex = 0;
-            int lineIndex = 1;
-            int wordLength = 0;
+            int lineIndex = 0;
+            float wordLength = 0;
             int y = 0;
 
             foreach (string s in words)
@@ -102,7 +137,8 @@ namespace Engine.Engine.Utilities
                 for (int i = 0; i < s.Length; i++)
                 {
                     sprites.Add(new Sprite((int)Location.X + wordLength, (int)Location.Y + ((textWidth + spacing) * y), textType));
-                    sprites.Last().ChangeInto(dialouge.Substring(dialougeIndex, 1));
+                    sprites.Last().SetFrame(Dialogue.Substring(dialougeIndex, 1).ToCharArray()[0], 16);
+                    sprites.Last().SetScale(scale);
                     if (!showAll) { sprites.Last().Show = false; }
 
                     if (compact)
@@ -112,13 +148,13 @@ namespace Engine.Engine.Utilities
                             switch (textType)
                             {
                                 case Sprite.Type.Text8x8:
-                                    wordLength += 3;
+                                    wordLength += 3 * scale;
                                     break;
                                 case Sprite.Type.Text16x16:
-                                    wordLength += 6;
+                                    wordLength += 6 * scale;
                                     break;
                                 case Sprite.Type.Text19x19:
-                                    wordLength += 6;
+                                    wordLength += 6 * scale;
                                     break;
                             }
                         }
@@ -127,13 +163,13 @@ namespace Engine.Engine.Utilities
                             switch (textType)
                             {
                                 case Sprite.Type.Text8x8:
-                                    wordLength += 5;
+                                    wordLength += 5 * scale;
                                     break;
                                 case Sprite.Type.Text16x16:
-                                    wordLength += 10;
+                                    wordLength += 10 * scale;
                                     break;
                                 case Sprite.Type.Text19x19:
-                                    wordLength += 10;
+                                    wordLength += 10 * scale;
                                     break;
                             }
                         }
@@ -142,13 +178,13 @@ namespace Engine.Engine.Utilities
                             switch (textType)
                             {
                                 case Sprite.Type.Text8x8:
-                                    wordLength += 6;
+                                    wordLength += 6 * scale;
                                     break;
                                 case Sprite.Type.Text16x16:
-                                    wordLength += 12;
+                                    wordLength += 12 * scale;
                                     break;
                                 case Sprite.Type.Text19x19:
-                                    wordLength += 12;
+                                    wordLength += 12 * scale;
                                     break;
                             }
                         }
@@ -161,7 +197,7 @@ namespace Engine.Engine.Utilities
                     {
                         if (s[i] == 'I')
                         {
-                            sprites.Last().SetLocation(sprites.Last().X + 4, sprites.Last().Y);
+                            sprites.Last().SetLocation(sprites.Last().X + 4 * scale, sprites.Last().Y);
                         }
                         wordLength += textWidth;
                     }

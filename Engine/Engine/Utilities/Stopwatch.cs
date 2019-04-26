@@ -65,7 +65,7 @@ namespace Engine.Engine.Utilities
 
         private int ParseTime(int index, string currentTime)
         {
-            return Int32.Parse(currentTime.Substring(index, 2));
+            return int.Parse(currentTime.Substring(index, 2));
         }
 
         public void Update(GameTime gameTimer)

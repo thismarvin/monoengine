@@ -33,6 +33,8 @@ namespace Engine.Engine.Utilities
         public static Color GreedGreen = new Color(0, 168, 68);
         public static Color GreenishBlue = new Color(0, 64, 88);
         public static Color OrangeOrange = new Color(248, 56, 0);
+        public static Color CoinYellow = new Color(248, 184, 0);
+        public static Color CobaltBlue = new Color(0, 88, 248);
 
         // GrafxKid Palette.
         public static Color GhostWhite = new Color(250, 246, 238);

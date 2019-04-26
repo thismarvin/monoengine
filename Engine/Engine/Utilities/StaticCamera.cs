@@ -44,8 +44,6 @@ namespace Engine.Engine.Utilities
             topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
             bottomLetterBox = new Shape(-128, Camera.ScreenBounds.Height, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
 
-            //HorizontalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width) / 2; // Test
-
             if (!ScreenManager.WideScreenSupport)
             {
                 HorizontalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width) / 2;
