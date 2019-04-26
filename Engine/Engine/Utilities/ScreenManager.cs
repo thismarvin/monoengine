@@ -34,7 +34,7 @@ namespace Engine.Engine.Utilities
             DefaultWindowHeight = defaultWindowHeight;
 
             mappedKey = Keys.F10;
-            WideScreenSupport = true;
+            WideScreenSupport = false;
 
             sampleFPS = new Queue<float>();
         }

@@ -41,8 +41,8 @@ namespace Engine.Engine.Utilities
         private static void SetupLandscapeLetterBox(int windowWidth, int windowHeight)
         {
             VerticalLetterBox = (windowHeight / Zoom - Camera.ScreenBounds.Height) / 2;
-            topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
-            bottomLetterBox = new Shape(-128, Camera.ScreenBounds.Height, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
+            topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.RealScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
+            bottomLetterBox = new Shape(-128, Camera.RealScreenBounds.Height, Camera.RealScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
 
             if (!ScreenManager.WideScreenSupport)
             {
@@ -69,7 +69,7 @@ namespace Engine.Engine.Utilities
         private static void FinalizePortraitMatrix()
         {
             // Fixed on Top Left.
-            Transform = Matrix.CreateTranslation(new Vector3(VerticalLetterBox, 0, 0)) *
+            Transform = Matrix.CreateTranslation(new Vector3(VerticalLetterBox, HorizontalLetterBox, 0)) *
                         Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
         }
 
@@ -91,14 +91,18 @@ namespace Engine.Engine.Utilities
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            topLetterBox.Draw(spriteBatch);
-            bottomLetterBox.Draw(spriteBatch);
-
-            if (!ScreenManager.WideScreenSupport && Game1.GameOrientation == Game1.Orientation.Landscape)
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Transform);
             {
-                leftLetterBox.Draw(spriteBatch);
-                rightLetterBox.Draw(spriteBatch);
+                topLetterBox.Draw(spriteBatch);
+                bottomLetterBox.Draw(spriteBatch);
+
+                if (!ScreenManager.WideScreenSupport && Game1.GameOrientation == Game1.Orientation.Landscape)
+                {
+                    leftLetterBox.Draw(spriteBatch);
+                    rightLetterBox.Draw(spriteBatch);
+                }
             }
+            spriteBatch.End();
         }
     }
 }

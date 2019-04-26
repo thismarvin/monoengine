@@ -154,6 +154,7 @@ namespace Engine.Engine.GameComponents
                 case Mode.PLAYFIELD:
                     Playfield.Draw(spriteBatch);
                     HUD.Draw(spriteBatch);
+                    StaticCamera.Draw(spriteBatch);
                     break;
             }
 
