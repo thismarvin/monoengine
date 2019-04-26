@@ -13,7 +13,7 @@ namespace Engine.Engine.Entities.Geometry
         Vector2 origin;
         Vector2 endPoint;
         float rotation;
-        int distance;
+        float distance;
         int thickness;
 
         public Line(float x1, float y1, float x2, float y2) : base(x1, y1, 1, 1)
@@ -44,7 +44,7 @@ namespace Engine.Engine.Entities.Geometry
 
         private void Setup()
         {
-            distance = (int)Math.Round(Math.Sqrt(Math.Pow(Math.Abs(endPoint.X - origin.X), 2) + Math.Pow(Math.Abs(endPoint.Y - origin.Y), 2)));
+            distance = (float)(Math.Sqrt(Math.Pow(Math.Abs(endPoint.X - origin.X), 2) + Math.Pow(Math.Abs(endPoint.Y - origin.Y), 2)));
             rotation = (float)Math.Atan2(endPoint.Y - origin.Y, endPoint.X - origin.X);
         }
 
