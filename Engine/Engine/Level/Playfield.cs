@@ -11,6 +11,7 @@ using Engine.Engine.Utilities;
 using Engine.Engine.Entities;
 using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
+using Engine.Engine.Entities.Geometry;
 
 namespace Engine.Engine.Level
 {

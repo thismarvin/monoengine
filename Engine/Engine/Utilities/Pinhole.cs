@@ -1,4 +1,4 @@
-﻿using Engine.Engine.Entities;
+﻿using Engine.Engine.Entities.Geometry;
 using Engine.Engine.GameComponents;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

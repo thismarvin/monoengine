@@ -45,12 +45,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Engine\Entities\Circle.cs" />
+    <Compile Include="Engine\Entities\Geometry\Circle.cs" />
     <Compile Include="Engine\Entities\Entity.cs" />
     <Compile Include="Engine\Entities\Kinetic.cs" />
-    <Compile Include="Engine\Entities\Line.cs" />
-    <Compile Include="Engine\Entities\Player.cs" />
-    <Compile Include="Engine\Entities\Shape.cs" />
+    <Compile Include="Engine\Entities\Geometry\Line.cs" />
+    <Compile Include="Engine\Entities\User\Player.cs" />
+    <Compile Include="Engine\Entities\Geometry\Shape.cs" />
     <Compile Include="Engine\Game Components\Game1.cs" />
     <Compile Include="Engine\Game Components\MonoObject.cs" />
     <Compile Include="Engine\Level\HUD.cs" />

@@ -1,16 +1,19 @@
-﻿using Engine.Engine.GameComponents;
-using Engine.Engine.Level;
-using Engine.Engine.Resources;
-using Engine.Engine.Utilities;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+using Engine.Engine.Entities.Geometry;
+using Engine.Engine.GameComponents;
+using Engine.Engine.Level;
+using Engine.Engine.Resources;
+using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities
 {

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using Engine.Engine.Utilities;
 
-namespace Engine.Engine.Entities
+namespace Engine.Engine.Entities.Geometry
 {
     class Line : Entity
     {

@@ -13,7 +13,7 @@ namespace Engine.Engine.Entities
     {
         public Vector2 Velocity { get; private set; }
         public List<Rectangle> CollisionRectangles { get; private set; }
-          public List<Rectangle> ScaledCollisionRectangles { get; private set; }
+        public List<Rectangle> ScaledCollisionRectangles { get; private set; }
         public float Gravity { get; set; }
         public float MoveSpeed { private get; set; }
         protected float Speed { get; private set; }

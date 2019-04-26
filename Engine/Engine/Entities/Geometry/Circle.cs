@@ -8,7 +8,7 @@ using Engine.Engine.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Engine.Engine.Entities
+namespace Engine.Engine.Entities.Geometry
 {
     class Circle : Entity
     {

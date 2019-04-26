@@ -1,11 +1,10 @@
-﻿
-using System;
+﻿using System;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using Engine.Engine.Entities;
 using Engine.Engine.GameComponents;
+using Engine.Engine.Entities.Geometry;
 
 namespace Engine.Engine.Utilities
 {
