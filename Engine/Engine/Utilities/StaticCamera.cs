@@ -1,8 +1,6 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.GameComponents;
 using Engine.Engine.Entities.Geometry;
 
@@ -15,22 +13,14 @@ namespace Engine.Engine.Utilities
         public static float VerticalLetterBox { get; private set; }
         public static float HorizontalLetterBox { get; private set; }
 
-        private static Shape topLetterBox;
-        private static Shape bottomLetterBox;
-        private static Shape leftLetterBox;
-        private static Shape rightLetterBox;
+        static Shape topLetterBox;
+        static Shape bottomLetterBox;
+        static Shape leftLetterBox;
+        static Shape rightLetterBox;
 
         public static void Initialize()
         {
-            switch (Game1.GameOrientation)
-            {
-                case Game1.Orientation.Landscape:
-                    Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
-                    break;
-                case Game1.Orientation.Portrait:
-                    Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
-                    break;
-            }
+            Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
         }
 
         private static void ResetZoom()
@@ -52,24 +42,21 @@ namespace Engine.Engine.Utilities
             }
         }
 
-        private static void SetupPortraitLetterBox(int windowWidth)
+        private static void SetupPortraitLetterBox(int windowWidth, int windowHeight)
         {
-            VerticalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width * Camera.Scale) / 2;
-            topLetterBox = new Shape(-(int)VerticalLetterBox - 128, -128, (int)VerticalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
-            bottomLetterBox = new Shape(Camera.ScreenBounds.Width, -128, (int)VerticalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Black);
+            HorizontalLetterBox = (windowWidth / Zoom - Camera.ScreenBounds.Width * Camera.Scale) / 2;
+            leftLetterBox = new Shape(-(int)HorizontalLetterBox - 128, -128, (int)HorizontalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Red);
+            rightLetterBox = new Shape(Camera.ScreenBounds.Width, -128, (int)HorizontalLetterBox + 128, Camera.ScreenBounds.Height + 128 * 2, Color.Red);
+
+            VerticalLetterBox = (windowHeight / Zoom - Camera.ScreenBounds.Height * Camera.Scale) / 2;
+            topLetterBox = new Shape(-128, -(int)VerticalLetterBox - 128, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
+            bottomLetterBox = new Shape(-128, Camera.ScreenBounds.Height, Camera.ScreenBounds.Width + 128 * 2, (int)VerticalLetterBox + 128, Color.Black);
         }
 
-        private static void FinalizeLanscapeMatrix()
+        private static void FinalizeMatrix()
         {
             // Fixed on Top Left.
             Transform = Matrix.CreateTranslation(new Vector3(HorizontalLetterBox, VerticalLetterBox, 0)) *
-                        Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
-        }
-
-        private static void FinalizePortraitMatrix()
-        {
-            // Fixed on Top Left.
-            Transform = Matrix.CreateTranslation(new Vector3(VerticalLetterBox, HorizontalLetterBox, 0)) *
                         Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
         }
 
@@ -80,27 +67,35 @@ namespace Engine.Engine.Utilities
             {
                 case Game1.Orientation.Landscape:
                     SetupLandscapeLetterBox(windowWidth, windowHeight);
-                    FinalizeLanscapeMatrix();
                     break;
                 case Game1.Orientation.Portrait:
-                    SetupPortraitLetterBox(windowWidth);
-                    FinalizePortraitMatrix();
+                    SetupPortraitLetterBox(windowWidth, windowHeight);
                     break;
             }
+            FinalizeMatrix();
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Transform);
             {
-                topLetterBox.Draw(spriteBatch);
-                bottomLetterBox.Draw(spriteBatch);
-
-                if (!ScreenManager.WideScreenSupport && Game1.GameOrientation == Game1.Orientation.Landscape)
+                switch (Game1.GameOrientation)
                 {
-                    leftLetterBox.Draw(spriteBatch);
-                    rightLetterBox.Draw(spriteBatch);
-                }
+                    case Game1.Orientation.Landscape:
+                        topLetterBox.Draw(spriteBatch);
+                        bottomLetterBox.Draw(spriteBatch);
+                        if (!ScreenManager.WideScreenSupport)
+                        {
+                            leftLetterBox.Draw(spriteBatch);
+                            rightLetterBox.Draw(spriteBatch);
+                        }
+                        break;
+
+                    case Game1.Orientation.Portrait:
+                        leftLetterBox.Draw(spriteBatch);
+                        rightLetterBox.Draw(spriteBatch);
+                        break;
+                }                
             }
             spriteBatch.End();
         }

@@ -1,6 +1,4 @@
-﻿
-using System;
-using Engine.Engine.GameComponents;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -20,13 +18,17 @@ namespace Engine.Engine.Utilities
         public enum InputType
         { AttackUp, AttackLeft, AttackDown, AttackRight, MovementUp, MovementLeft, MovementDown, MovementRight, Select, Back }
 
-        // Specialized for Dynamic Camera.
         public Vector2 DynamicCursorLocation { get; private set; }
         public Rectangle DynamicCollisionRectangle { get; private set; }
 
-        // Specialized for Stationary Camera.
         public Vector2 StaticCursorLocation { get; private set; }
         public Rectangle StaticCollisionRectangle { get; private set; }
+
+        public Input()
+        {
+            playerIndex = PlayerIndex.One;
+            timer = new Timer(200);
+        }
 
         public Input(PlayerIndex playerIndex)
         {
@@ -34,18 +36,18 @@ namespace Engine.Engine.Utilities
             timer = new Timer(200);
         }
 
-        public void Update(GameTime gameTimer)
+        public void Update(GameTime gameTime)
         {
-            UpdateKeyboard(gameTimer);
+            UpdateKeyboard(gameTime);
             UpdateMouse();
         }
 
-        private void UpdateKeyboard(GameTime gameTimer)
+        private void UpdateKeyboard(GameTime gameTime)
         {
             KeyState = Keyboard.GetState();
             if (!KeyReleased)
             {
-                timer.Update(gameTimer);
+                timer.Update(gameTime);
             }
             if (timer.Done)
             {
@@ -60,21 +62,10 @@ namespace Engine.Engine.Utilities
             if (MouseState.LeftButton == ButtonState.Released)
             { MouseReleased = true; }
 
-            switch (Game1.GameOrientation)
-            {
-                case Game1.Orientation.Landscape:
-                    DynamicCursorLocation = new Vector2(MouseState.X / Camera.Zoom + Camera.TopLeft.X, MouseState.Y / Camera.Zoom - StaticCamera.VerticalLetterBox + Camera.TopLeft.Y);
-                    DynamicCollisionRectangle = new Rectangle((int)DynamicCursorLocation.X, (int)DynamicCursorLocation.Y, 1, 1);
-                    StaticCursorLocation = new Vector2(MouseState.X / StaticCamera.Zoom - StaticCamera.HorizontalLetterBox, MouseState.Y / StaticCamera.Zoom - StaticCamera.VerticalLetterBox);
-                    StaticCollisionRectangle = new Rectangle((int)StaticCursorLocation.X, (int)StaticCursorLocation.Y, 1, 1); ;
-                    break;
-                case Game1.Orientation.Portrait:
-                    DynamicCursorLocation = new Vector2(MouseState.X / Camera.Zoom + Camera.TopLeft.X - StaticCamera.VerticalLetterBox, MouseState.Y / Camera.Zoom + Camera.TopLeft.Y);
-                    DynamicCollisionRectangle = new Rectangle((int)DynamicCursorLocation.X, (int)DynamicCursorLocation.Y, 1, 1);
-                    StaticCursorLocation = new Vector2(MouseState.X / StaticCamera.Zoom - StaticCamera.VerticalLetterBox, MouseState.Y / StaticCamera.Zoom - StaticCamera.VerticalLetterBox);
-                    StaticCollisionRectangle = new Rectangle((int)StaticCursorLocation.X, (int)StaticCursorLocation.Y, 1, 1); ;
-                    break;
-            }
+            DynamicCursorLocation = new Vector2(MouseState.X / Camera.Zoom / Camera.Scale + Camera.TopLeft.X / Camera.Scale - StaticCamera.HorizontalLetterBox / Camera.Scale, MouseState.Y / Camera.Zoom / Camera.Scale - StaticCamera.VerticalLetterBox + Camera.TopLeft.Y / Camera.Scale);
+            DynamicCollisionRectangle = new Rectangle((int)DynamicCursorLocation.X, (int)DynamicCursorLocation.Y, 1, 1);
+            StaticCursorLocation = new Vector2(MouseState.X / StaticCamera.Zoom / Camera.Scale - StaticCamera.HorizontalLetterBox / Camera.Scale, MouseState.Y / StaticCamera.Zoom / Camera.Scale - StaticCamera.VerticalLetterBox / Camera.Scale);
+            StaticCollisionRectangle = new Rectangle((int)StaticCursorLocation.X, (int)StaticCursorLocation.Y, 1, 1);
         }
 
         public bool LeftClick()

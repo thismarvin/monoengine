@@ -1,11 +1,7 @@
-﻿
-using System;
-using System.Text;
+﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
 
@@ -68,14 +64,14 @@ namespace Engine.Engine.Utilities
             return int.Parse(currentTime.Substring(index, 2));
         }
 
-        public void Update(GameTime gameTimer)
+        public void Update(GameTime gameTime)
         {
-            TimerLogic(gameTimer);
+            TimerLogic(gameTime);
         }
 
-        private void TimerLogic(GameTime gameTimer)
+        private void TimerLogic(GameTime gameTime)
         {
-            timer.Update(gameTimer);
+            timer.Update(gameTime);
 
             if (timer.Done && !Done)
             {

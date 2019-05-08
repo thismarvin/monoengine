@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using Engine.Engine.Utilities;
 using Engine.Engine.Entities;
-using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
 using Engine.Engine.Entities.Geometry;
 
@@ -18,18 +13,15 @@ namespace Engine.Engine.Level
     static class Playfield
     {
         public static List<Entity> Entities { get; private set; }
-        public static List<Entity> EntityBuffer { get; private set; }
+        public static List<Entity> EntityBuffer { get; private set; }        
+        public static List<Player> Players { get; private set; }
         public static List<Shape> BoundingBoxes { get; private set; }
 
         public static Vector2 CameraLocation { get; private set; }
-
         public static Random RNG { get; set; }
-
+        public static bool Multiplayer { get; private set; }       
         public static bool GameOver { get; set; }
-
-        public static List<Player> Players { get; private set; }
-        public static bool Multiplayer { get; private set; }
-
+        
         private static bool noSpam;
 
         public static void Initialize()
@@ -83,14 +75,11 @@ namespace Engine.Engine.Level
         private static void BackToMenu()
         {
             Reset();
-            Game1.GameMode = Game1.Mode.MENU;
+            Game1.GameMode = Game1.Mode.Menu;
         }
 
         private static void CameraHandler(GameTime gameTime)
         {
-            //Console.WriteLine(cameraPanX + " " + cameraPanY);
-            //Console.WriteLine(panDirX + " " + panDirY);           
-
             Camera.Update();
         }
 

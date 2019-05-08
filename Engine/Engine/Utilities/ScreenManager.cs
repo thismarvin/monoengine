@@ -1,14 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using Engine.Engine.GameComponents;
-using Engine.Engine.Level;
 
 namespace Engine.Engine.Utilities
 {
@@ -18,13 +13,13 @@ namespace Engine.Engine.Utilities
         public static int DisplayHeight { get; private set; }
         public static int DefaultWindowHeight { get; private set; }
         public static int DefaultWindowWidth { get; private set; }
+        public static bool WideScreenSupport { get; private set; }
         public static float FPS { get; private set; }
+
         static Queue<float> sampleFPS;
         static Keys mappedKey;
         static bool released;
-        static bool fullscreen;
-
-        public static bool WideScreenSupport { get; private set; }
+        static bool fullscreen;       
 
         public static void Initialize(int defaultWindowWidth, int defaultWindowHeight)
         {

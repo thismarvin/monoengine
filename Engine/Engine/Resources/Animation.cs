@@ -1,8 +1,5 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
-
 using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Resources
@@ -48,9 +45,9 @@ namespace Engine.Engine.Resources
             Columns = columns;
         }
 
-        public void Update(GameTime gameTimer)
+        public void Update(GameTime gameTime)
         {
-            timer.Update(gameTimer);
+            timer.Update(gameTime);
             if (timer.Done)
             {
                 switch (type)

@@ -1,12 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
 
@@ -14,14 +11,15 @@ namespace Engine.Engine.Utilities
 {
     class Text : MonoObject
     {
+        public string Dialogue { get; private set; }
+
         List<string> words;
         List<Sprite> sprites;
         Timer timer;
         Sprite.Type textType;
         float textWidth;
         int maximumCharacterCount;
-        float spacing;
-        public string Dialogue { get; private set; }
+        float spacing;       
         bool showAll;
         float scale;    
         bool compact;

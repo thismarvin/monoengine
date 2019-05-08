@@ -1,13 +1,8 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-using Engine.Engine.Resources;
 using Engine.Engine.Utilities;
-using System.Collections.Generic;
-using Engine.Engine.Entities;
-using Engine.Engine.GameComponents;
-using System;
 
 namespace Engine.Engine.Level
 {

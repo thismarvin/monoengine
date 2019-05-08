@@ -1,10 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities
@@ -14,21 +11,17 @@ namespace Engine.Engine.Entities
         public Vector2 Velocity { get; private set; }
         public List<Rectangle> CollisionRectangles { get; private set; }
         public List<Rectangle> ScaledCollisionRectangles { get; private set; }
-        public float Gravity { get; set; }
         public float MoveSpeed { private get; set; }
-        protected float Speed { get; private set; }
+        protected float ScaledMoveSpeed { get; private set; }
         public int CollisionWidth { get; private set; }
 
         public enum Direction
         { Left, Right, Up, Down, None }
         public Direction Facing { get; set; }
 
-        public bool Falling { get; set; }
-
         public Kinetic(float x, float y, int width, int height, float moveSpeed) : base(x, y, width, height)
         {
             Velocity = Vector2.Zero;
-            Gravity = 0.2f;
             MoveSpeed = moveSpeed;
             Facing = Direction.Right;
         }
@@ -71,6 +64,7 @@ namespace Engine.Engine.Entities
         {
             if (CollisionRectangles == null)
                 return;
+
             spriteBatch.Draw(ShapeManager.Texture, ScaledCollisionRectangle, ObjectColor);
             foreach (Rectangle r in ScaledCollisionRectangles)
             {
@@ -78,9 +72,9 @@ namespace Engine.Engine.Entities
             }
         }
 
-        protected void CalculateSpeed(GameTime gameTime)
+        protected void CalculateScaledSpeed(GameTime gameTime)
         {
-            Speed = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            ScaledMoveSpeed = MoveSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         protected abstract void ApplyForce(GameTime gameTime);

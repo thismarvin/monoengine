@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
 using Engine.Engine.Entities.Geometry;
 using Engine.Engine.GameComponents;
 using Engine.Engine.Level;
-using Engine.Engine.Resources;
 using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities
@@ -98,22 +91,22 @@ namespace Engine.Engine.Entities
             switch (direction)
             {
                 case Direction.Left:
-                    SetLocation(X - Speed, Y);
+                    SetLocation(X - ScaledMoveSpeed, Y);
                     SetVelocity(-1, Velocity.Y);
                     break;
 
                 case Direction.Right:
-                    SetLocation(X + Speed, Y);
+                    SetLocation(X + ScaledMoveSpeed, Y);
                     SetVelocity(1, Velocity.Y);
                     break;
 
                 case Direction.Up:
-                    SetLocation(X, Y - Speed);
+                    SetLocation(X, Y - ScaledMoveSpeed);
                     SetVelocity(Velocity.X, -1);
                     break;
 
                 case Direction.Down:
-                    SetLocation(X, Y + Speed);
+                    SetLocation(X, Y + ScaledMoveSpeed);
                     SetVelocity(Velocity.X, 1);
                     break;
             }
@@ -152,12 +145,12 @@ namespace Engine.Engine.Entities
 
         public override void Update(GameTime gameTime)
         {
-            CalculateSpeed(gameTime);
+            CalculateScaledSpeed(gameTime);
             UpdateInput(gameTime);
             UpdateCollisionRectangles();
             Collision();
             UpdateAnimation(gameTime);
-            LayerDepth = (int)Y + Height;
+            UpdateLayerDepth();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

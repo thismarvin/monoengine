@@ -1,10 +1,7 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using Engine.Engine.Utilities;
 using Engine.Engine.Level;
 using Engine.Engine.Resources;
@@ -21,7 +18,7 @@ namespace Engine.Engine.GameComponents
         int defaultWindowWidth;
 
         public enum Mode
-        { MENU, PLAYFIELD, NONE }
+        { Menu, Playfield, None }
         public static Mode GameMode { get; set; }
 
         public enum Orientation
@@ -40,13 +37,13 @@ namespace Engine.Engine.GameComponents
             title = "UberCoolCustomCraftedMonoGameEngine";
 
             // Toggle Mouse Visibility.
-            IsMouseVisible = false;
+            IsMouseVisible = true;
 
             int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
             GameOrientation = Orientation.Landscape;
-            GameMode = Mode.PLAYFIELD;
+            GameMode = Mode.Playfield;
 
             defaultWindowWidth = 480 * 2;
             defaultWindowHeight = 270 * 2;
@@ -55,8 +52,7 @@ namespace Engine.Engine.GameComponents
             graphics.PreferredBackBufferWidth = defaultWindowWidth;
             graphics.PreferredBackBufferHeight = defaultWindowHeight;
 
-            EnableVSync(false);
-            SetTargetFPS(500);
+            EnableVSync(false);            
 
             graphics.ApplyChanges();
         }
@@ -67,6 +63,10 @@ namespace Engine.Engine.GameComponents
             {
                 graphics.SynchronizeWithVerticalRetrace = true;
                 base.IsFixedTimeStep = false;
+            }
+            else
+            {
+                SetTargetFPS(500);
             }
         }
 
@@ -134,9 +134,9 @@ namespace Engine.Engine.GameComponents
 
             switch (GameMode)
             {
-                case Mode.MENU:
+                case Mode.Menu:
                     break;
-                case Mode.PLAYFIELD:
+                case Mode.Playfield:
                     Playfield.Update(gameTime);
                     HUD.Update(gameTime);
                     break;
@@ -151,10 +151,9 @@ namespace Engine.Engine.GameComponents
 
             switch (GameMode)
             {
-                case Mode.PLAYFIELD:
+                case Mode.Playfield:
                     Playfield.Draw(spriteBatch);
                     HUD.Draw(spriteBatch);
-                    
                     break;
             }
 

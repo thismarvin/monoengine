@@ -1,9 +1,6 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities.Geometry
@@ -14,7 +11,7 @@ namespace Engine.Engine.Entities.Geometry
         Vector2 endPoint;
         float rotation;
         float distance;
-        int thickness;
+        float thickness;
 
         public Line(float x1, float y1, float x2, float y2) : base(x1, y1, 1, 1)
         {
@@ -26,7 +23,7 @@ namespace Engine.Engine.Entities.Geometry
             Setup();
         }
 
-        public Line(float x1, float y1, float x2, float y2, int thickness) : this(x1, y1, x2, y2)
+        public Line(float x1, float y1, float x2, float y2, float thickness) : this(x1, y1, x2, y2)
         {
             this.thickness = thickness;
         }
@@ -36,7 +33,7 @@ namespace Engine.Engine.Entities.Geometry
             ObjectColor = color;
         }
 
-        public Line(float x1, float y1, float x2, float y2, int thickness, Color color) : this(x1, y1, x2, y2)
+        public Line(float x1, float y1, float x2, float y2, float thickness, Color color) : this(x1, y1, x2, y2)
         {
             this.thickness = thickness;
             ObjectColor = color;
@@ -60,7 +57,7 @@ namespace Engine.Engine.Entities.Geometry
             Setup();
         }
 
-        public void SetThickness(int thickness)
+        public void SetThickness(float thickness)
         {
             this.thickness = thickness;
         }

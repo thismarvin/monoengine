@@ -1,9 +1,6 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-
 using Engine.Engine.GameComponents;
 
 namespace Engine.Engine.Utilities
@@ -32,12 +29,14 @@ namespace Engine.Engine.Utilities
             {
                 case Game1.Orientation.Landscape:
                     Zoom = (float)windowHeight / shortSide;
+                    // Check if letterboxing is required.
                     if (longSide * Zoom > windowWidth)
                     {
-                        Zoom = windowWidth / longSide;
+                        Zoom = (float)windowWidth / longSide;
                     }
                     else if (longSide * Zoom < windowWidth)
                     {
+                        // Disable letterboxing if WideScreenSupport is enabled.
                         if (ScreenManager.WideScreenSupport)
                         {
                             longSide = (int)((windowWidth - longSide * Zoom) / Zoom) + longSide;
@@ -47,7 +46,12 @@ namespace Engine.Engine.Utilities
                     break;
 
                 case Game1.Orientation.Portrait:
-                    Zoom = (float)windowWidth / longSide;
+                    Zoom = (float)windowWidth / shortSide;
+                    // Check if letterboxing is required.
+                    if (longSide * Zoom > windowHeight)
+                    {
+                        Zoom = (float)windowHeight / longSide;
+                    }
                     ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
             }
@@ -56,16 +60,7 @@ namespace Engine.Engine.Utilities
         public static void Update()
         {
             Input();
-
-            switch (Game1.GameOrientation)
-            {
-                case Game1.Orientation.Landscape:
-                    FinalizeLandscapeMatrix();
-                    break;
-                case Game1.Orientation.Portrait:
-                    FinalizePortraitMatrix();
-                    break;
-            }
+            FinalizeMatrix();
         }
 
         public static void Update(Vector2 topLeft, float minWidth, float maxWidth, float minHeight, float maxHeight)
@@ -74,16 +69,7 @@ namespace Engine.Engine.Utilities
 
             Input();
             StayWithinBounds(minWidth, maxWidth, minHeight, maxHeight);
-
-            switch (Game1.GameOrientation)
-            {
-                case Game1.Orientation.Landscape:
-                    FinalizeLandscapeMatrix();
-                    break;
-                case Game1.Orientation.Portrait:
-                    FinalizePortraitMatrix();
-                    break;
-            }
+            FinalizeMatrix();
         }
 
         private static void Input()
@@ -108,17 +94,10 @@ namespace Engine.Engine.Utilities
             TopLeft.Y = (TopLeft.Y + ScreenBounds.Height > maxHeight ? maxHeight - ScreenBounds.Height : TopLeft.Y);
         }
 
-        private static void FinalizeLandscapeMatrix()
+        private static void FinalizeMatrix()
         {
             // Fixed on Top Left.
             Transform = Matrix.CreateTranslation(new Vector3(-TopLeft.X + StaticCamera.HorizontalLetterBox, -TopLeft.Y + StaticCamera.VerticalLetterBox, 0)) *
-                        Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
-        }
-
-        private static void FinalizePortraitMatrix()
-        {
-            // Fixed on Top Left.
-            Transform = Matrix.CreateTranslation(new Vector3(-TopLeft.X + StaticCamera.VerticalLetterBox, -TopLeft.Y, 0)) *
                         Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
         }
     }

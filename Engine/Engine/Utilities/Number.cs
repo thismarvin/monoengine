@@ -1,13 +1,8 @@
-﻿
-using System;
-using System.Text;
+﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
-using System.Linq;
 
 namespace Engine.Engine.Utilities
 {

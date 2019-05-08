@@ -1,6 +1,4 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
 
 namespace Engine.Engine.Utilities
@@ -41,9 +39,6 @@ namespace Engine.Engine.Utilities
         public static Color DirtyWater = new Color(0, 171, 196);
 
         // Misc.
-        public static Color CheckerBoard = new Color(0, 0, 0, 100);
-        public static Color DoctorBlue = new Color(0, 136, 136);
-
         public static Color[] Rainbow = new Color[] { OceanBlue, DarkPurple, LightPurple, BloodRed, FleshPink, ConeOrange, TaxiYellow, TreeGreen, GrassGreen };
     }
 }

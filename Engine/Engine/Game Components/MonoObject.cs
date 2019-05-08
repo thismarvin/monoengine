@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Engine.Engine.Utilities;
 using Microsoft.Xna.Framework;
 

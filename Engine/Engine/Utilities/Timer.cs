@@ -1,6 +1,4 @@
-﻿
-using System;
-
+﻿using System;
 using Microsoft.Xna.Framework;
 
 namespace Engine.Engine.Utilities
@@ -54,8 +52,7 @@ namespace Engine.Engine.Utilities
             }
             if (Stop)
             {
-                Console.WriteLine(elapsedTime);
-                Console.WriteLine();
+
             }
         }
     }

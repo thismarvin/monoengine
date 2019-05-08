@@ -1,17 +1,14 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
 using Engine.Engine.Utilities;
 
 namespace Engine.Engine.Entities.Geometry
 {
     class Shape : Entity
     {
-        List<Rectangle> addRectangles;
+        List<Rectangle> rectangles;
         int lineWidth;
         public bool Show { get; set; }
         public Tag ID { get; set; }
@@ -25,7 +22,7 @@ namespace Engine.Engine.Entities.Geometry
         {
             Show = true;
             ObjectColor = objectColor;
-            addRectangles = new List<Rectangle>();
+            rectangles = new List<Rectangle>();
             ID = Tag.None;
             Setup();
         }
@@ -36,6 +33,11 @@ namespace Engine.Engine.Entities.Geometry
             Setup();
         }
 
+        public Shape(float x, float y, int width, int height, Tag tag, Color objectColor) : this(x, y, width, height, objectColor)
+        {
+            ID = tag;
+        }
+
         public Shape(float x, float y, int width, int height, int lineWidth, Tag tag, Color objectColor) : this(x, y, width, height, lineWidth, objectColor)
         {
             ID = tag;
@@ -43,17 +45,17 @@ namespace Engine.Engine.Entities.Geometry
 
         private void Setup()
         {
-            addRectangles.Clear();
+            rectangles.Clear();
             if (lineWidth == 0)
             {
-                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, Height * Camera.Scale));
+                rectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, Height * Camera.Scale));
             }
             else
             {
-                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, lineWidth * Camera.Scale));
-                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + (Height - lineWidth) * Camera.Scale, Width * Camera.Scale, lineWidth * Camera.Scale));
-                addRectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
-                addRectangles.Add(new Rectangle((int)ScaledLocation.X + Width * Camera.Scale - lineWidth * Camera.Scale, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
+                rectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y, Width * Camera.Scale, lineWidth * Camera.Scale));
+                rectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + (Height - lineWidth) * Camera.Scale, Width * Camera.Scale, lineWidth * Camera.Scale));
+                rectangles.Add(new Rectangle((int)ScaledLocation.X, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
+                rectangles.Add(new Rectangle((int)ScaledLocation.X + Width * Camera.Scale - lineWidth * Camera.Scale, (int)ScaledLocation.Y + lineWidth * Camera.Scale, lineWidth * Camera.Scale, Height * Camera.Scale - lineWidth * 2 * Camera.Scale));
             }
         }
 
@@ -85,7 +87,7 @@ namespace Engine.Engine.Entities.Geometry
         {
             if (Show)
             {
-                foreach (Rectangle R in addRectangles)
+                foreach (Rectangle R in rectangles)
                 {
                     spriteBatch.Draw(ShapeManager.Texture, R, ObjectColor);
                 }

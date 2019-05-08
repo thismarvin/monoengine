@@ -1,12 +1,7 @@
-﻿using Engine.Engine.GameComponents;
-using Engine.Engine.Resources;
+﻿using System;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Engine.Engine.Resources;
 
 namespace Engine.Engine.Utilities
 {
@@ -16,7 +11,7 @@ namespace Engine.Engine.Utilities
 
         public enum Sound
         {
-           NONE
+           None
         }
 
         public static void Initialize()
@@ -34,7 +29,7 @@ namespace Engine.Engine.Utilities
         {
             switch (sound)
             {
-                case Sound.NONE:
+                case Sound.None:
                     break;
             }
         }
