@@ -10,34 +10,34 @@ namespace Engine.Engine.Entities.Geometry
     class Circle : Entity
     {
         List<Line> lines;
-        public int Radius { get; private set; }
-        int lineWidth;
+        public float Radius { get; private set; }
+        public float LineWidth { get; private set; }
         const float INCREMENT = (float)Math.PI * 2 / 360;
 
-        public Circle(float x, float y, int radius) : base(x, y, 1, 1)
+        public Circle(float x, float y, float radius) : base(x, y, 1, 1)
         {
             lines = new List<Line>();
             Radius = radius;
-            lineWidth = radius;
+            LineWidth = radius;
 
             CreateCircle(X, Y);
         }
 
-        public Circle(float x, float y, int radius, int lineWidth) : this(x, y, radius)
+        public Circle(float x, float y, float radius, float lineWidth) : this(x, y, radius)
         {
-            this.lineWidth = lineWidth;
+            LineWidth = lineWidth;
             CreateCircle(X, Y);
         }
 
-        public Circle(float x, float y, int radius, Color objectColor) : this(x, y, radius)
+        public Circle(float x, float y, float radius, Color objectColor) : this(x, y, radius)
         {
             ObjectColor = objectColor;
             CreateCircle(X, Y);
         }
 
-        public Circle(float x, float y, int radius, int lineWidth, Color objectColor) : this(x, y, radius)
+        public Circle(float x, float y, float radius, float lineWidth, Color objectColor) : this(x, y, radius)
         {
-            this.lineWidth = lineWidth;
+            LineWidth = lineWidth;
             ObjectColor = objectColor;
             CreateCircle(X, Y);
         }
@@ -47,7 +47,7 @@ namespace Engine.Engine.Entities.Geometry
             lines.Clear();
             for (float i = 0; i < Math.PI; i += INCREMENT / 2)
             {
-                lines.Add(new Line(x - Radius + CircleX(i), y + CircleY(i), x - Radius + CircleX(i + INCREMENT), y + CircleY(i + INCREMENT), lineWidth, ObjectColor));
+                lines.Add(new Line(x - Radius + CircleX(i), y + CircleY(i), x - Radius + CircleX(i + INCREMENT), y + CircleY(i + INCREMENT), LineWidth, ObjectColor));
             }
         }
 
@@ -67,13 +67,13 @@ namespace Engine.Engine.Entities.Geometry
             SetLocation(x, y);
         }
 
-        public void SetLineWidth(int lineWidth)
+        public void SetLineWidth(float lineWidth)
         {
-            this.lineWidth = lineWidth <= Radius ? lineWidth : Radius;
+            LineWidth = lineWidth <= Radius ? lineWidth : Radius;
             CreateCircle(X, Y);
         }
 
-        public void SetRadius(int radius)
+        public void SetRadius(float radius)
         {
             Radius = radius;
             CreateCircle(X, Y);

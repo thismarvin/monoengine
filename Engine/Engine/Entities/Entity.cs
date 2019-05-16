@@ -61,6 +61,11 @@ namespace Engine.Engine.Entities
             SetCollisionRectangle(X, Y, Width, Height);
         }
 
+        public void SetColor(Color color)
+        {
+            ObjectColor = color;
+        }
+
         public int CompareTo(object obj)
         {
             return LayerDepth.CompareTo(((Entity)obj).LayerDepth);

@@ -13,15 +13,15 @@ namespace Engine.Engine.Level
     static class Playfield
     {
         public static List<Entity> Entities { get; private set; }
-        public static List<Entity> EntityBuffer { get; private set; }        
+        public static List<Entity> EntityBuffer { get; private set; }
         public static List<Player> Players { get; private set; }
         public static List<Shape> BoundingBoxes { get; private set; }
 
         public static Vector2 CameraLocation { get; private set; }
         public static Random RNG { get; set; }
-        public static bool Multiplayer { get; private set; }       
+        public static bool Multiplayer { get; private set; }
         public static bool GameOver { get; set; }
-        
+
         private static bool noSpam;
 
         public static void Initialize()
@@ -70,7 +70,7 @@ namespace Engine.Engine.Level
         public static void AddEntity(Entity e)
         {
             EntityBuffer.Add(e);
-        }   
+        }
 
         private static void BackToMenu()
         {

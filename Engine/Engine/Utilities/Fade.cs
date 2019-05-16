@@ -10,10 +10,10 @@ namespace Engine.Engine.Utilities
     {
         Shape shape;
         Color fade;
+        Timer timer;
         public bool Done { get; private set; }
         Type type;
-        Timer timer;
-
+        
         public enum Type
         {
             FadeToBlack, FadeFromBlack
