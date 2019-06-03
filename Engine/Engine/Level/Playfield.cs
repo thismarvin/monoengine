@@ -22,7 +22,7 @@ namespace Engine.Engine.Level
         public static bool Multiplayer { get; private set; }
         public static bool GameOver { get; set; }
 
-        private static bool noSpam;
+        static Input input;
 
         public static void Initialize()
         {
@@ -30,7 +30,9 @@ namespace Engine.Engine.Level
             EntityBuffer = new List<Entity>();
             Players = new List<Player>();
             BoundingBoxes = new List<Shape>();
+
             RNG = new Random(DateTime.Now.Millisecond);
+
             Reset();
         }
 
@@ -40,6 +42,10 @@ namespace Engine.Engine.Level
 
             Entities.Clear();
             ResetPlayers();
+
+            input = new Input(PlayerIndex.One);
+
+            HUD.Reset();
         }
 
         private static void ResetPlayers()
@@ -83,15 +89,14 @@ namespace Engine.Engine.Level
             Camera.Update();
         }
 
-        private static void UpdateInput()
+        private static void UpdateInput(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.R) && noSpam)
+            input.Update(gameTime);
+            if (input.KeyState.IsKeyDown(Keys.R) && input.KeyReleased)
             {
                 Reset();
-                HUD.Reset();
-                noSpam = false;
+                input.KeyReleased = false;
             }
-            noSpam = Keyboard.GetState().IsKeyUp(Keys.R) ? true : noSpam;
         }
 
         private static void UpdateEntities(GameTime gameTime)
@@ -121,22 +126,22 @@ namespace Engine.Engine.Level
         public static void Update(GameTime gameTime)
         {
             CameraHandler(gameTime);
-            UpdateInput();
+            UpdateInput(gameTime);
             UpdateEntities(gameTime);
         }
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
-            {
-
-            }
-            spriteBatch.End();
-
             foreach (Entity e in Entities)
             {
                 e.Draw(spriteBatch);
             }
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
+            {
+
+            }
+            spriteBatch.End();        
         }
     }
 }
