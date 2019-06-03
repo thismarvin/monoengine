@@ -41,23 +41,6 @@ namespace Engine.Engine.Utilities
             Set(CurrentValue);
         }
 
-        public void Increment(int incrementValue)
-        {
-            CurrentValue += incrementValue;
-
-            if (CurrentValue > MaxValue)
-            {
-                CurrentValue = MaxValue;
-            }
-
-            Set(CurrentValue);
-        }
-
-        private int SetVauleFromString(string number)
-        {
-            return number.ToCharArray()[0] - 48;
-        }
-
         public void Set(int value)
         {
             Reset();
@@ -72,6 +55,13 @@ namespace Engine.Engine.Utilities
                 }
             }
             CurrentValue = value;
+        }
+
+        public void Increment(int incrementValue)
+        {
+            CurrentValue = CurrentValue + incrementValue > MaxValue ? MaxValue : CurrentValue + incrementValue;
+
+            Set(CurrentValue);
         }
 
         private void Reset()

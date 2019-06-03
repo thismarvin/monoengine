@@ -8,8 +8,7 @@ namespace Engine.Engine.GameComponents
     {
         public float X { get; private set; }
         public float Y { get; private set; }
-        public Vector2 Location { get; set; }
-
+        public Vector2 Location { get; set; }    
         public Vector2 ScaledLocation { get { return new Vector2(Location.X * Camera.Scale, Location.Y * Camera.Scale); } }
 
         public MonoObject(float x, float y)
