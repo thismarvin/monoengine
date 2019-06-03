@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Engine\Entities\Geometry\Circle.cs" />
     <Compile Include="Engine\Entities\Entity.cs" />
+    <Compile Include="Engine\Entities\Geometry\Spline.cs" />
     <Compile Include="Engine\Entities\Kinetic.cs" />
     <Compile Include="Engine\Entities\Geometry\Line.cs" />
     <Compile Include="Engine\Entities\User\Player.cs" />
