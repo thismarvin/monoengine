@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Engine.Engine.Resources;
 using Engine.Engine.GameComponents;
+using Engine.Engine.Entities.Geometry;
 
 namespace Engine.Engine.Utilities
 {
@@ -19,45 +20,35 @@ namespace Engine.Engine.Utilities
         Sprite.Type textType;
         float textWidth;
         int maximumCharacterCount;
-        float spacing;       
+        float spacing;
         bool showAll;
-        float scale;    
+        float scale;
         bool compact;
 
-        public Text(float x, float y, string text, Sprite.Type type) : base(x, y)
+        public Shape Bounds { get; private set; }
+        Color color;
+
+        public Text(float x, float y, string dialogue, float scale, Sprite.Type type, Color color) : base(x, y)
         {
             words = new List<string>();
             sprites = new List<Sprite>();
             timer = new Timer(0);
 
-            Dialogue = text;
+            Dialogue = dialogue;
             textType = type;
-            maximumCharacterCount = text.Length * 2;
+            maximumCharacterCount = dialogue.Length * 2;
             compact = true;
             showAll = true;
-            scale = 1;
+            this.scale = scale;
 
             BreakUpWords();
             CreateText();
+            SetColor(color);
         }
 
-        public Text(float x, float y, string text, Sprite.Type type, float scale) : this(x, y, text, type)
+        public Text(float x, float y, string dialogue, Sprite.Type type) : this(x, y, dialogue, 1, type, Color.White)
         {
-            this.scale = scale;
-            CreateText();
-        }
 
-        public Text(float x, float y, string text, Sprite.Type type, int maximumCharacterCount, float textSpeed) : this(x, y, text, type)
-        {
-            this.maximumCharacterCount = maximumCharacterCount;
-            showAll = textSpeed <= 0 ? true : false;
-            CreateText();
-        }
-
-        public Text(float x, float y, string text, Sprite.Type type, int maximumCharacterCount, float textSpeed, float scale) : this(x, y, text, type, maximumCharacterCount, textSpeed)
-        {
-            this.scale = scale;
-            CreateText();
         }
 
         private void TextSetup()
@@ -81,7 +72,6 @@ namespace Engine.Engine.Utilities
 
             textWidth *= scale;
             spacing *= scale;
-
         }
 
         public void SetCompact(bool compact)
@@ -101,6 +91,15 @@ namespace Engine.Engine.Utilities
             Dialogue = text;
             BreakUpWords();
             CreateText();
+        }
+
+        public void SetColor(Color color)
+        {
+            this.color = color;
+            foreach (Sprite s in sprites)
+            {
+                s.SetColor(this.color);
+            }
         }
 
         private void BreakUpWords()
@@ -210,6 +209,8 @@ namespace Engine.Engine.Utilities
                 wordLength += textWidth;
             }
 
+            Bounds = new Shape(X, Y, (int)Math.Ceiling((y == 0 ? wordLength - textWidth : maximumCharacterCount * textWidth)), (int)Math.Ceiling(textWidth * (y + 1)), 2, Palette.GrassGreen);
+
             sprites.Reverse();
         }
 
@@ -241,6 +242,9 @@ namespace Engine.Engine.Utilities
             {
                 S.Draw(spriteBatch);
             }
+
+            if (Game1.DebugMode)
+                Bounds.Draw(spriteBatch);
         }
     }
 }
