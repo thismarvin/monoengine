@@ -151,6 +151,8 @@ namespace Engine.Engine.GameComponents
 
             switch (GameMode)
             {
+                case Mode.Menu:
+                    break;
                 case Mode.Playfield:
                     Playfield.Draw(spriteBatch);
                     HUD.Draw(spriteBatch);
