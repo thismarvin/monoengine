@@ -145,12 +145,15 @@ namespace Engine.Engine.Entities
 
         public override void Update(GameTime gameTime)
         {
-            CalculateScaledSpeed(gameTime);
-            UpdateInput(gameTime);
-            UpdateCollisionRectangles();
-            Collision();
-            UpdateAnimation(gameTime);
-            UpdateLayerDepth();
+            if (!Dead)
+            {
+                CalculateScaledSpeed(gameTime);
+                UpdateCollisionRectangles();
+                UpdateInput(gameTime);
+                Collision();
+                UpdateAnimation(gameTime);
+                UpdateLayerDepth();
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
