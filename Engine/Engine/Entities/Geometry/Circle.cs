@@ -9,43 +9,43 @@ namespace Engine.Engine.Entities.Geometry
 {
     class Circle : Entity
     {
+        const float INCREMENT = 1 * 2 * (float)Math.PI / 360;
         List<Line> lines;
+        public Shape Bounds { get; private set; }
         public float Radius { get; private set; }
         public float LineWidth { get; private set; }
-        const float INCREMENT = (float)Math.PI * 2 / 360;
 
-        public Circle(float x, float y, float radius) : base(x, y, 1, 1)
+        public Circle(float x, float y, float radius) : this(x, y, radius, radius, Color.White)
         {
-            lines = new List<Line>();
+
+        }
+
+        public Circle(float x, float y, float radius, Color color) : this(x, y, radius, radius, color)
+        {
+
+        }
+
+        public Circle(float x, float y, float radius, float lineWidth) : this(x, y, radius, lineWidth, Color.White)
+        {
+
+        }
+
+        public Circle(float x, float y, float radius, float lineWidth, Color color) : base(x, y, 1, 1)
+        {
             Radius = radius;
-            LineWidth = radius;
-
-            CreateCircle(X, Y);
-        }
-
-        public Circle(float x, float y, float radius, float lineWidth) : this(x, y, radius)
-        {
             LineWidth = lineWidth;
-            CreateCircle(X, Y);
-        }
+            ObjectColor = color;
+            Bounds = new Shape(X - radius, Y - radius, (int)(radius * 2), (int)(radius * 2), 1, Palette.GrassGreen);
 
-        public Circle(float x, float y, float radius, Color objectColor) : this(x, y, radius)
-        {
-            ObjectColor = objectColor;
-            CreateCircle(X, Y);
-        }
+            lines = new List<Line>();
 
-        public Circle(float x, float y, float radius, float lineWidth, Color objectColor) : this(x, y, radius)
-        {
-            LineWidth = lineWidth;
-            ObjectColor = objectColor;
             CreateCircle(X, Y);
         }
 
         private void CreateCircle(float x, float y)
         {
             lines.Clear();
-            for (float i = 0; i < Math.PI; i += INCREMENT / 2)
+            for (float i = 0; i <= Math.PI; i += INCREMENT)
             {
                 lines.Add(new Line(x - Radius + CircleX(i), y + CircleY(i), x - Radius + CircleX(i + INCREMENT), y + CircleY(i + INCREMENT), LineWidth, ObjectColor));
             }
@@ -79,6 +79,12 @@ namespace Engine.Engine.Entities.Geometry
             CreateCircle(X, Y);
         }
 
+        public new void SetColor(Color color)
+        {
+            base.SetColor(color);
+            CreateCircle(X, Y);
+        }
+
         private float CircleX(float x)
         {
             return (float)((Math.Cos(x)) * Math.Cos(x)) * Radius * 2;
@@ -89,22 +95,22 @@ namespace Engine.Engine.Entities.Geometry
             return (float)((Math.Cos(y)) * Math.Sin(y)) * Radius * 2;
         }
 
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (Game1.DebugMode)
+            {
+                Bounds.Draw(spriteBatch);
+            }
+
             foreach (Line l in lines)
             {
                 l.Draw(spriteBatch);
             }
-
-            if (Game1.DebugMode)
-            {
-                spriteBatch.Draw(ShapeManager.Texture, CollisionRectangle, Palette.TreeGreen);
-            }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-
         }
     }
 }

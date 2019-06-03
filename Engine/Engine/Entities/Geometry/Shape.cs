@@ -10,37 +10,20 @@ namespace Engine.Engine.Entities.Geometry
     {
         List<Rectangle> rectangles;
         int lineWidth;
-        public bool Show { get; set; }
-        public Tag ID { get; set; }
 
-        public enum Tag
+        public Shape(float x, float y, int width, int height, Color color) : this(x, y, width, height, 0, color)
         {
-            None
+
         }
 
-        public Shape(float x, float y, int width, int height, Color objectColor) : base(x, y, width, height)
-        {
-            Show = true;
-            ObjectColor = objectColor;
-            rectangles = new List<Rectangle>();
-            ID = Tag.None;
-            Setup();
-        }
-
-        public Shape(float x, float y, int width, int height, int lineWidth, Color objectColor) : this(x, y, width, height, objectColor)
+        public Shape(float x, float y, int width, int height, int lineWidth, Color color) : base(x, y, width, height)
         {
             this.lineWidth = lineWidth;
+            ObjectColor = color;
+
+            rectangles = new List<Rectangle>();
+
             Setup();
-        }
-
-        public Shape(float x, float y, int width, int height, Tag tag, Color objectColor) : this(x, y, width, height, objectColor)
-        {
-            ID = tag;
-        }
-
-        public Shape(float x, float y, int width, int height, int lineWidth, Tag tag, Color objectColor) : this(x, y, width, height, lineWidth, objectColor)
-        {
-            ID = tag;
         }
 
         private void Setup()
@@ -83,20 +66,17 @@ namespace Engine.Engine.Entities.Geometry
             Setup();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (Show)
-            {
-                foreach (Rectangle R in rectangles)
-                {
-                    spriteBatch.Draw(ShapeManager.Texture, R, ObjectColor);
-                }
-            }
-        }
-
         public override void Update(GameTime gameTime)
         {
 
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Rectangle R in rectangles)
+            {
+                spriteBatch.Draw(ShapeManager.Texture, R, ObjectColor);
+            }
         }
     }
 }

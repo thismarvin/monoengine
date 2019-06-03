@@ -7,53 +7,48 @@ namespace Engine.Engine.Entities.Geometry
 {
     class Line : Entity
     {
-        Vector2 origin;
-        Vector2 endPoint;
-        float rotation;
-        float distance;
+        public Vector2 Origin { get; private set; }
+        public Vector2 EndPoint { get; private set; }
+        public float Magnitude { get; private set; }
         float thickness;
+        float rotation;
 
-        public Line(float x1, float y1, float x2, float y2) : base(x1, y1, 1, 1)
+        public Line(float x1, float y1, float x2, float y2) : this(x1, y1, x2, y2, 1, Color.White)
         {
-            origin = new Vector2(x1, y1);
-            endPoint = new Vector2(x2, y2);
-            ObjectColor = Color.White;
-            thickness = 1;
+
+        }
+
+        public Line(float x1, float y1, float x2, float y2, float thickness, Color color) : base(x1, y1, 1, 1)
+        {
+            Origin = new Vector2(x1, y1);
+            EndPoint = new Vector2(x2, y2);
+            this.thickness = thickness;
+            ObjectColor = color;
 
             Setup();
         }
 
-        public Line(float x1, float y1, float x2, float y2, float thickness) : this(x1, y1, x2, y2)
-        {
-            this.thickness = thickness;
-        }
-
-        public Line(float x1, float y1, float x2, float y2, Color color) : this(x1, y1, x2, y2)
-        {
-            ObjectColor = color;
-        }
-
-        public Line(float x1, float y1, float x2, float y2, float thickness, Color color) : this(x1, y1, x2, y2)
-        {
-            this.thickness = thickness;
-            ObjectColor = color;
-        }
-
         private void Setup()
         {
-            distance = (float)(Math.Sqrt(Math.Pow(Math.Abs(endPoint.X - origin.X), 2) + Math.Pow(Math.Abs(endPoint.Y - origin.Y), 2)));
-            rotation = (float)Math.Atan2(endPoint.Y - origin.Y, endPoint.X - origin.X);
+            Magnitude = (float)(Math.Sqrt(Math.Pow(Math.Abs(EndPoint.X - Origin.X), 2) + Math.Pow(Math.Abs(EndPoint.Y - Origin.Y), 2)));
+            rotation = (float)Math.Atan2(EndPoint.Y - Origin.Y, EndPoint.X - Origin.X);
+        }
+
+        public new void SetLocation(float x, float y)
+        {
+            SetOrigin(x, y);
         }
 
         public void SetOrigin(float x, float y)
         {
-            origin = new Vector2(x, y);
+            base.SetLocation(x, y);
+            Origin = new Vector2(X, Y);
             Setup();
         }
 
         public void SetEndPoint(float x, float y)
         {
-            endPoint = new Vector2(x, y);
+            EndPoint = new Vector2(x, y);
             Setup();
         }
 
@@ -64,7 +59,7 @@ namespace Engine.Engine.Entities.Geometry
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(ShapeManager.Texture, new Vector2(origin.X * Camera.Scale, origin.Y * Camera.Scale), null, ObjectColor, rotation, Vector2.Zero, new Vector2(distance * Camera.Scale, thickness * Camera.Scale), SpriteEffects.None, 0);
+            spriteBatch.Draw(ShapeManager.Texture, new Vector2(Origin.X * Camera.Scale, Origin.Y * Camera.Scale), null, ObjectColor, rotation, Vector2.Zero, new Vector2(Magnitude * Camera.Scale, thickness * Camera.Scale), SpriteEffects.None, 0);
         }
 
         public override void Update(GameTime gameTime)
