@@ -1,10 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Engine.Engine.Root;
 using Engine.Engine.Entities.Geometry;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Utilities.Time;
+using Engine.Engine.Utilities.Cameras;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Transitions
 {
     class Fade : MonoObject
     {

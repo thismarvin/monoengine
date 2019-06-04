@@ -1,5 +1,5 @@
 ﻿using System;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Root;
 
 namespace Engine
 {
@@ -14,7 +14,7 @@ namespace Engine
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new GameRoot())
                 game.Run();
         }
     }

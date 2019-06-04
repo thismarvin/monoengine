@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using Engine.Engine.Root;
 using Engine.Engine.Resources;
-using Engine.Engine.GameComponents;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Typography
 {
     class Number : MonoObject
     {

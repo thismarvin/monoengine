@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Misc
 {
     class ShapeManager
     {

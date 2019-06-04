@@ -1,8 +1,8 @@
 ﻿using System;
-using Engine.Engine.Utilities;
 using Microsoft.Xna.Framework;
+using Engine.Engine.Utilities.Cameras;
 
-namespace Engine.Engine.GameComponents
+namespace Engine.Engine.Root
 {
     abstract class MonoObject
     {

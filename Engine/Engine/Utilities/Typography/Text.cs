@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Engine.Engine.Root;
 using Engine.Engine.Resources;
-using Engine.Engine.GameComponents;
 using Engine.Engine.Entities.Geometry;
+using Engine.Engine.Utilities.Palettes;
+using Engine.Engine.Utilities.Time;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Typography
 {
     class Text : MonoObject
     {
@@ -209,7 +211,7 @@ namespace Engine.Engine.Utilities
                 wordLength += textWidth;
             }
 
-            Bounds = new Shape(X, Y, (int)Math.Ceiling((y == 0 ? wordLength - textWidth : maximumCharacterCount * textWidth)), (int)Math.Ceiling(textWidth * (y + 1)), 2, Palette.GrassGreen);
+            Bounds = new Shape(X, Y, (int)Math.Ceiling((y == 0 ? wordLength - textWidth : maximumCharacterCount * textWidth)), (int)Math.Ceiling(textWidth * (y + 1)), 2, PICO8.GrassGreen);
 
             sprites.Reverse();
         }
@@ -243,7 +245,7 @@ namespace Engine.Engine.Utilities
                 S.Draw(spriteBatch);
             }
 
-            if (Game1.DebugMode)
+            if (GameRoot.DebugMode)
                 Bounds.Draw(spriteBatch);
         }
     }

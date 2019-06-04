@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Time
 {
     class Timer
     {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Engine.Engine.GameComponents;
-using Engine.Engine.Utilities;
+using Engine.Engine.Root;
+using Engine.Engine.Utilities.Cameras;
 
 namespace Engine.Engine.Entities.Geometry
 {
@@ -211,7 +211,7 @@ namespace Engine.Engine.Entities.Geometry
                     l.Draw(spriteBatch);
                 }
 
-                if (Game1.DebugMode || pointsVisible)
+                if (GameRoot.DebugMode || pointsVisible)
                 {
                     for (int i = 0; i < Circles.Count; i++)
                     {

@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Root;
+using Engine.Engine.Utilities.Display;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Cameras
 {
     static class Camera
     {
@@ -25,9 +26,9 @@ namespace Engine.Engine.Utilities
             int longSide = 480 * Scale;
             int shortSide = 270 * Scale;
 
-            switch (Game1.GameOrientation)
+            switch (GameRoot.GameOrientation)
             {
-                case Game1.Orientation.Landscape:
+                case GameRoot.Orientation.Landscape:
                     Zoom = (float)windowHeight / shortSide;
                     // Check if letterboxing is required.
                     if (longSide * Zoom > windowWidth)
@@ -45,7 +46,7 @@ namespace Engine.Engine.Utilities
                     ScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
-                case Game1.Orientation.Portrait:
+                case GameRoot.Orientation.Portrait:
                     Zoom = (float)windowWidth / shortSide;
                     // Check if letterboxing is required.
                     if (longSide * Zoom > windowHeight)

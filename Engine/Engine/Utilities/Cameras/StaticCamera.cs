@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Root;
 using Engine.Engine.Entities.Geometry;
+using Engine.Engine.Utilities.Display;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Cameras
 {
     static class StaticCamera
     {
@@ -63,12 +64,12 @@ namespace Engine.Engine.Utilities
         public static void Reset(int windowWidth, int windowHeight)
         {
             ResetZoom();
-            switch (Game1.GameOrientation)
+            switch (GameRoot.GameOrientation)
             {
-                case Game1.Orientation.Landscape:
+                case GameRoot.Orientation.Landscape:
                     SetupLandscapeLetterBox(windowWidth, windowHeight);
                     break;
-                case Game1.Orientation.Portrait:
+                case GameRoot.Orientation.Portrait:
                     SetupPortraitLetterBox(windowWidth, windowHeight);
                     break;
             }
@@ -79,9 +80,9 @@ namespace Engine.Engine.Utilities
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Transform);
             {
-                switch (Game1.GameOrientation)
+                switch (GameRoot.GameOrientation)
                 {
-                    case Game1.Orientation.Landscape:
+                    case GameRoot.Orientation.Landscape:
                         topLetterBox.Draw(spriteBatch);
                         bottomLetterBox.Draw(spriteBatch);
                         if (!ScreenManager.WideScreenSupport)
@@ -91,7 +92,7 @@ namespace Engine.Engine.Utilities
                         }
                         break;
 
-                    case Game1.Orientation.Portrait:
+                    case GameRoot.Orientation.Portrait:
                         leftLetterBox.Draw(spriteBatch);
                         rightLetterBox.Draw(spriteBatch);
                         break;

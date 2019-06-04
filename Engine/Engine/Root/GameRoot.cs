@@ -2,13 +2,17 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Engine.Engine.Utilities;
 using Engine.Engine.Level;
 using Engine.Engine.Resources;
+using Engine.Engine.Utilities.Palettes;
+using Engine.Engine.Utilities.Display;
+using Engine.Engine.Utilities.Cameras;
+using Engine.Engine.Utilities.Audio;
+using Engine.Engine.Utilities.Misc;
 
-namespace Engine.Engine.GameComponents
+namespace Engine.Engine.Root
 {
-    public class Game1 : Game
+    public class GameRoot : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -29,7 +33,7 @@ namespace Engine.Engine.GameComponents
         public static bool DebugMode { get; set; }
         bool released;
 
-        public Game1()
+        public GameRoot()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -147,7 +151,7 @@ namespace Engine.Engine.GameComponents
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Palette.SkyBlue);
+            GraphicsDevice.Clear(PICO8.SkyBlue);
 
             switch (GameMode)
             {

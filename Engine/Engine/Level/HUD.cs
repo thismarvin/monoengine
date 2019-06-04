@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Engine.Engine.Utilities;
+using Engine.Engine.Utilities.Cameras;
+using Engine.Engine.Utilities.Transitions;
 
 namespace Engine.Engine.Level
 {

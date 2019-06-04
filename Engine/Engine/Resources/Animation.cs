@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Engine.Engine.Utilities;
+using Engine.Engine.Utilities.Time;
 
 namespace Engine.Engine.Resources
 {

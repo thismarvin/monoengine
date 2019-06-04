@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Engine.Engine.Entities.Geometry;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Root;
 using Engine.Engine.Level;
-using Engine.Engine.Utilities;
+using Engine.Engine.Entities.Geometry;
+using Engine.Engine.Utilities.User_Input;
+using Engine.Engine.Utilities.Cameras;
 
 namespace Engine.Engine.Entities
 {
@@ -158,7 +159,7 @@ namespace Engine.Engine.Entities
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Game1.DebugMode)
+            if (GameRoot.DebugMode)
             {
                 spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, Camera.Transform);
                 {

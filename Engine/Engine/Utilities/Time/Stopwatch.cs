@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Engine.Engine.Root;
 using Engine.Engine.Resources;
-using Engine.Engine.GameComponents;
+using Engine.Engine.Utilities.Typography;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Time
 {
     class Stopwatch : MonoObject
     {

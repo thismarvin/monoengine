@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Palettes
 {
-    static class Palette
+    static class PICO8
     {
-        // PICO-8 Palette.
         public static Color MidnightBlack = new Color(0, 0, 0);
         public static Color WolfGray = new Color(95, 87, 79);
         public static Color LightGray = new Color(194, 195, 199);
@@ -22,23 +23,5 @@ namespace Engine.Engine.Utilities
         public static Color TaxiYellow = new Color(255, 255, 39, 255);
         public static Color TreeGreen = new Color(0, 135, 81);
         public static Color GrassGreen = new Color(0, 231, 86);
-
-        // Nes Patlette.
-        public static Color RadiantRed = new Color(228, 0, 88);
-        public static Color RedDelicious = new Color(168, 0, 32);
-        public static Color PoliceBlue = new Color(0, 120, 248);
-        public static Color GrapePurple = new Color(104, 68, 252);
-        public static Color GreedGreen = new Color(0, 168, 68);
-        public static Color GreenishBlue = new Color(0, 64, 88);
-        public static Color OrangeOrange = new Color(248, 56, 0);
-        public static Color CoinYellow = new Color(248, 184, 0);
-        public static Color CobaltBlue = new Color(0, 88, 248);
-
-        // GrafxKid Palette.
-        public static Color GhostWhite = new Color(250, 246, 238);
-        public static Color DirtyWater = new Color(0, 171, 196);
-
-        // Misc.
-        public static Color[] Rainbow = new Color[] { OceanBlue, DarkPurple, LightPurple, BloodRed, FleshPink, ConeOrange, TaxiYellow, TreeGreen, GrassGreen };
     }
 }

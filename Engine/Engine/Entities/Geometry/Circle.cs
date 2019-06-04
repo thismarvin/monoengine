@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Engine.Engine.GameComponents;
-using Engine.Engine.Utilities;
+using Engine.Engine.Root;
+using Engine.Engine.Utilities.Palettes;
 
 namespace Engine.Engine.Entities.Geometry
 {
@@ -35,7 +35,7 @@ namespace Engine.Engine.Entities.Geometry
             Radius = radius;
             LineWidth = lineWidth;
             ObjectColor = color;
-            Bounds = new Shape(X - radius, Y - radius, (int)(radius * 2), (int)(radius * 2), 1, Palette.GrassGreen);
+            Bounds = new Shape(X - radius, Y - radius, (int)(radius * 2), (int)(radius * 2), 1, PICO8.GrassGreen);
 
             lines = new List<Line>();
 
@@ -102,7 +102,7 @@ namespace Engine.Engine.Entities.Geometry
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Game1.DebugMode)
+            if (GameRoot.DebugMode)
             {
                 Bounds.Draw(spriteBatch);
             }

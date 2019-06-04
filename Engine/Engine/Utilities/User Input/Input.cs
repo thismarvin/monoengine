@@ -1,8 +1,10 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Engine.Engine.Utilities.Cameras;
+using Engine.Engine.Utilities.Time;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.User_Input
 {
     class Input
     {

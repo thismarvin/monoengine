@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Engine.Engine.Utilities;
+using Engine.Engine.Root;
 using Engine.Engine.Entities;
-using Engine.Engine.GameComponents;
 using Engine.Engine.Entities.Geometry;
+using Engine.Engine.Utilities.User_Input;
+using Engine.Engine.Utilities.Cameras;
 
 namespace Engine.Engine.Level
 {
@@ -81,7 +82,7 @@ namespace Engine.Engine.Level
         private static void BackToMenu()
         {
             Reset();
-            Game1.GameMode = Game1.Mode.Menu;
+            GameRoot.GameMode = GameRoot.Mode.Menu;
         }
 
         private static void CameraHandler(GameTime gameTime)

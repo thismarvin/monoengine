@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Engine.Engine.Resources;
 
-namespace Engine.Engine.Utilities
+namespace Engine.Engine.Utilities.Audio
 {
     static class SoundManager
     {
