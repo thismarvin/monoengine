@@ -7,51 +7,61 @@ using Engine.Engine.Utilities.Display;
 namespace Engine.Engine.Utilities.Cameras
 {
     static class Camera
-    {
-        public static float Zoom { get; set; }
+    {        
         public static Rectangle ScreenBounds { get; private set; }
         public static Matrix Transform { get; private set; }
         public static Vector2 TopLeft;
-
         public static int Scale { get; private set; }
+        public static float Zoom { get; private set; }
+        static int pixelWidth;
+        static int pixelHeight;
 
-        public static void Initialize()
+        public static void Initialize(int pixelWidth, int pixelHeight, int scale)
         {
+            CreatePixelScene(pixelWidth, pixelHeight, scale);
             Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
+        }
+
+        private static void CreatePixelScene(int pixelWidth, int pixelHeight, int scale)
+        {            
+            Scale = scale;
+            Camera.pixelWidth = pixelWidth * Scale;
+            Camera.pixelHeight = pixelHeight * Scale;
         }
 
         public static void Reset(int windowWidth, int windowHeight)
         {
-            Scale = 3;
-            int longSide = 480 * Scale;
-            int shortSide = 270 * Scale;
+            int longSide = pixelWidth > pixelHeight ? pixelWidth : pixelHeight;
+            int shortSide = pixelWidth < pixelHeight ? pixelWidth : pixelHeight;
+            int longDisplayDimension = windowWidth > windowHeight ? windowWidth : windowHeight;
+            int shortDisplayDimension = windowWidth < windowHeight ? windowWidth : windowHeight;
 
             switch (GameRoot.GameOrientation)
             {
                 case GameRoot.Orientation.Landscape:
-                    Zoom = (float)windowHeight / shortSide;
+                    Zoom = (float)shortDisplayDimension / shortSide;
                     // Check if letterboxing is required.
-                    if (longSide * Zoom > windowWidth)
+                    if (longSide * Zoom > longDisplayDimension)
                     {
-                        Zoom = (float)windowWidth / longSide;
+                        Zoom = (float)longDisplayDimension / longSide;
                     }
-                    else if (longSide * Zoom < windowWidth)
+                    else if (longSide * Zoom < longDisplayDimension)
                     {
                         // Disable letterboxing if WideScreenSupport is enabled.
                         if (ScreenManager.WideScreenSupport)
                         {
-                            longSide = (int)((windowWidth - longSide * Zoom) / Zoom) + longSide;
+                            longSide = (int)((longDisplayDimension - longSide * Zoom) / Zoom) + longSide;
                         }
                     }
                     ScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
                 case GameRoot.Orientation.Portrait:
-                    Zoom = (float)windowWidth / shortSide;
+                    Zoom = (float)longDisplayDimension / longSide;
                     // Check if letterboxing is required.
-                    if (longSide * Zoom > windowHeight)
+                    if (longSide * Zoom > shortDisplayDimension)
                     {
-                        Zoom = (float)windowHeight / longSide;
+                        Zoom = (float)shortDisplayDimension / shortSide;
                     }
                     ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
