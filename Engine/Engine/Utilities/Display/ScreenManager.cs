@@ -29,6 +29,14 @@ namespace Engine.Engine.Utilities.Display
             DefaultWindowWidth = defaultWindowWidth;
             DefaultWindowHeight = defaultWindowHeight;
 
+#if __IOS__ || __ANDROID__
+            DefaultWindowWidth = DisplayWidth;
+            DefaultWindowHeight = DisplayHeight;
+#else
+            DefaultWindowWidth = defaultWindowWidth;
+            DefaultWindowHeight = defaultWindowHeight;
+#endif
+
             mappedKey = Keys.F10;
             WideScreenSupport = false;
 

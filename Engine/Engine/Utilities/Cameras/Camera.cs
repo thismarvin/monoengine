@@ -57,11 +57,11 @@ namespace Engine.Engine.Utilities.Cameras
                     break;
 
                 case GameRoot.Orientation.Portrait:
-                    Zoom = (float)longDisplayDimension / longSide;
-                    // Check if letterboxing is required.
-                    if (longSide * Zoom > shortDisplayDimension)
+                    Zoom = (float)shortDisplayDimension / shortSide;
+                    // Check if letterboxing is required. ??? Im not sure if i really need this.
+                    if (longSide * Zoom > longDisplayDimension)
                     {
-                        Zoom = (float)shortDisplayDimension / shortSide;
+                        Zoom = (float)longDisplayDimension / longSide;
                     }
                     ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
