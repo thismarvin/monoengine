@@ -18,8 +18,12 @@ namespace Engine.Engine.Root
         SpriteBatch spriteBatch;
 
         string title;
+        bool startFullscreen;
         int defaultWindowHeight;
         int defaultWindowWidth;
+        int pixelWidth;
+        int pixelHeight;
+        int scale;
 
         public enum Mode
         { Menu, Playfield, None }
@@ -38,27 +42,60 @@ namespace Engine.Engine.Root
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            title = "UberCoolCustomCraftedMonoGameEngine";
+            title = "UberCoolCustomCraftedMonoGame2DEngine";
 
-            // Toggle Mouse Visibility.
             IsMouseVisible = true;
+            startFullscreen = false;
 
-            int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-
-            GameOrientation = Orientation.Landscape;
             GameMode = Mode.Playfield;
 
-            defaultWindowWidth = 480 * 2;
-            defaultWindowHeight = 270 * 2;
-
-            // Set Screen Dimensions.
-            graphics.PreferredBackBufferWidth = defaultWindowWidth;
-            graphics.PreferredBackBufferHeight = defaultWindowHeight;
-
-            EnableVSync(false);            
+            SetupWindow(1280, 720, Orientation.Landscape);
+            SetupPixelScene(320, 180, 1);
+            EnableVSync(true);
 
             graphics.ApplyChanges();
+        }
+
+        private void SetupWindow(int defaultWindowWidth, int defaultWindowHeight, Orientation orientation)
+        {
+            this.defaultWindowWidth = defaultWindowWidth;
+            this.defaultWindowHeight = defaultWindowHeight;
+            GameOrientation = orientation;
+
+            // Set Supported Orientations.
+            switch (GameOrientation)
+            {
+                case Orientation.Landscape:
+                    graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+                    break;
+                case Orientation.Portrait:
+                    graphics.SupportedOrientations = DisplayOrientation.Portrait;
+                    break;
+            }
+
+            // Make sure default dimensions are in line with the game's orientation.
+            if ((GameOrientation == Orientation.Landscape && this.defaultWindowHeight > this.defaultWindowWidth) || (GameOrientation == Orientation.Portrait && this.defaultWindowWidth > this.defaultWindowHeight))
+            {
+                int copy = this.defaultWindowWidth;
+                this.defaultWindowWidth = this.defaultWindowHeight;
+                this.defaultWindowHeight = copy;
+            }
+
+            // Set Screen Dimensions.
+#if __IOS__ || __ANDROID__
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width; ;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+#else
+            graphics.PreferredBackBufferWidth = this.defaultWindowWidth;
+            graphics.PreferredBackBufferHeight = this.defaultWindowHeight;
+#endif
+        }
+
+        private void SetupPixelScene(int pixelWidth, int pixelHeight, int scale)
+        {
+            this.pixelWidth = pixelWidth;
+            this.pixelHeight = pixelHeight;
+            this.scale = scale;
         }
 
         private void EnableVSync(bool vsync)
@@ -66,7 +103,7 @@ namespace Engine.Engine.Root
             if (vsync)
             {
                 graphics.SynchronizeWithVerticalRetrace = true;
-                base.IsFixedTimeStep = false;
+                IsFixedTimeStep = false;
             }
             else
             {
@@ -93,15 +130,17 @@ namespace Engine.Engine.Root
 
         private void ExitGameLogic()
         {
+#if !__IOS__ && !__TVOS__
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) { ExitGame = true; }
             if (ExitGame) { Exit(); }
+#endif
         }
 
         protected override void Initialize()
         {
             ShapeManager.Initialize(graphics);
             ScreenManager.Initialize(defaultWindowWidth, defaultWindowHeight);
-            Camera.Initialize();
+            Camera.Initialize(pixelWidth, pixelHeight, scale);
             StaticCamera.Initialize();
 
             base.Initialize();
@@ -117,8 +156,10 @@ namespace Engine.Engine.Root
             Playfield.Initialize();
             HUD.Initialize();
 
-            // Start Game FullScreen.
-            //ScreenManager.StartFullScreen(graphics);
+#if !__IOS__ && !__ANDROID__
+            if (startFullscreen)
+                ScreenManager.StartFullScreen(graphics);
+#endif
         }
 
         protected override void UnloadContent()
