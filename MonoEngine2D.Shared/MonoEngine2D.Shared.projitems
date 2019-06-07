@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>00b250ea-7e34-4511-ae72-e2f631947ebb</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MonoEngine2D.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Engine\Entities\World\" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Entity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Geometry\Circle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Geometry\Line.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Geometry\Shape.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Geometry\Spline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Kinetic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\User\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Level\HUD.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Level\Playfield.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Resources\Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Resources\Assets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Resources\Sprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Root\GameRoot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Root\MonoObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Audio\SoundManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Cameras\Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Cameras\StaticCamera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Display\ScreenManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Misc\ShapeManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Palettes\NES.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Palettes\PICO8.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Time\Stopwatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Time\Timer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Transitions\Fade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Transitions\Pinhole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Number.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Text.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\User Input\Input.cs" />
+  </ItemGroup>
+</Project>
