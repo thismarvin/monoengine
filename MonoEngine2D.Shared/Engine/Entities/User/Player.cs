@@ -149,8 +149,8 @@ namespace MonoEngine2D.Engine.Entities
             if (!Dead)
             {
                 CalculateScaledSpeed(gameTime);
-                UpdateCollisionRectangles();
                 UpdateInput(gameTime);
+                UpdateCollisionRectangles();                
                 Collision();
                 UpdateAnimation(gameTime);
                 UpdateLayerDepth();
