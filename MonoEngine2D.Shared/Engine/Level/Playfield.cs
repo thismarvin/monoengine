@@ -142,7 +142,7 @@ namespace MonoEngine2D.Engine.Level
             {
 
             }
-            spriteBatch.End();        
+            spriteBatch.End();
         }
     }
 }

@@ -4,11 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Marvin/Desktop/MonoEngine2D Shared Project/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 16.png</File>
-    <File>C:/Users/Marvin/Desktop/MonoEngine2D Shared Project/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 19.png</File>
-    <File>C:/Users/Marvin/Desktop/MonoEngine2D Shared Project/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 8.png</File>
-    <File>C:/Users/Marvin/Desktop/MonoEngine2D Shared Project/MonoEngine2D.Shared/Content/Assets/Sprites/Player.png</File>
-    <File>C:/Users/Marvin/Desktop/MonoEngine2D Shared Project/MonoEngine2D.Shared/Content/Assets/Sprites/Sprites.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Git Projects/Monogame 2D Engine/monoengine/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 16.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Git Projects/Monogame 2D Engine/monoengine/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 19.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Git Projects/Monogame 2D Engine/monoengine/MonoEngine2D.Shared/Content/Assets/Sprites/ASCII 8.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Git Projects/Monogame 2D Engine/monoengine/MonoEngine2D.Shared/Content/Assets/Sprites/Player.png</File>
+    <File>C:/Users/Marvin/Desktop/Master/Programming/MonoGame/Workspace/Git Projects/Monogame 2D Engine/monoengine/MonoEngine2D.Shared/Content/Assets/Sprites/Sprites.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

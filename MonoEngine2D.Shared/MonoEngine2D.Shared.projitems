@@ -44,5 +44,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Number.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Text.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\User Input\Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
   </ItemGroup>
 </Project>
