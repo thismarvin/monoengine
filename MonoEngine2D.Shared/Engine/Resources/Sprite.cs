@@ -38,7 +38,7 @@ namespace MonoEngine2D.Engine.Resources
             None
         }
 
-        public Sprite(float x, float y, Type sprite) : base(x, y)
+        public Sprite(float x, float y, Type sprite) : base(x, y,1,1)
         {
             spriteSheet = Assets.Sprites;
             ObjectColor = Color.White;

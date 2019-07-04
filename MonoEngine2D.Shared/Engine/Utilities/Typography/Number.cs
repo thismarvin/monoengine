@@ -12,7 +12,7 @@ namespace MonoEngine2D.Engine.Utilities.Typography
         public int CurrentValue { get; private set; }
         public int MaxValue { get; private set; }
 
-        public Number(float x, float y, int currentValue, int totalPlaceValue, int maxValue, Sprite.Type whatFont) : base(x, y)
+        public Number(float x, float y, int currentValue, int totalPlaceValue, int maxValue, Sprite.Type whatFont) : base(x, y,1,1)
         {
             MaxValue = maxValue;
             CurrentValue = currentValue;

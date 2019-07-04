@@ -30,7 +30,7 @@ namespace MonoEngine2D.Engine.Utilities.Typography
         public Shape Bounds { get; private set; }
         Color color;
 
-        public Text(float x, float y, string dialogue, float scale, Sprite.Type type, Color color) : base(x, y)
+        public Text(float x, float y, string dialogue, float scale, Sprite.Type type, Color color) : base(x, y,1,1)
         {
             words = new List<string>();
             sprites = new List<Sprite>();

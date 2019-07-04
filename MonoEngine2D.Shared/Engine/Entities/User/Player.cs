@@ -153,7 +153,6 @@ namespace MonoEngine2D.Engine.Entities
                 UpdateCollisionRectangles();                
                 Collision();
                 UpdateAnimation(gameTime);
-                UpdateLayerDepth();
             }
         }
 

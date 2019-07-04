@@ -21,7 +21,7 @@ namespace MonoEngine2D.Engine.Utilities.Time
             CountUp, CountDown
         }
 
-        public Stopwatch(float x, float y, string currentTime, Type timerType, Sprite.Type spriteType) : base(x, y)
+        public Stopwatch(float x, float y, string currentTime, Type timerType, Sprite.Type spriteType) : base(x, y,1,1)
         {
             numbers = new List<Number>();
             sprites = new List<Sprite>();
