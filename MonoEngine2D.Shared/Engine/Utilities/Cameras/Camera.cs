@@ -20,6 +20,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
         {
             CreatePixelScene(pixelWidth, pixelHeight, scale);
             Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
+            FinalizeMatrix();
         }
 
         private static void CreatePixelScene(int pixelWidth, int pixelHeight, int scale)
