@@ -5,85 +5,92 @@ using MonoEngine2D.Engine.Root;
 using MonoEngine2D.Engine.Entities.Geometry;
 using MonoEngine2D.Engine.Utilities.Time;
 using MonoEngine2D.Engine.Utilities.Cameras;
+using MonoEngine2D.Shared.Engine.Utilities.Transitions;
 
 namespace MonoEngine2D.Engine.Utilities.Transitions
 {
-    class Fade : MonoObject
+    class Fade : Transition
     {
         Shape shape;
+        Color color;
         Color fade;
-        Timer timer;
-        public bool Done { get; private set; }
-        Type type;
+        byte alpha;
         
-        public enum Type
+        public Fade(TransitionType type) : this(type, Color.Black, 100, 100)
         {
-            FadeToBlack, FadeFromBlack
+
         }
 
-        public Fade(float x, float y, Type type) : base(x, y)
+        public Fade(TransitionType type, Color color) : this(type, color, 100, 100)
         {
-            this.type = type;
-            timer = new Timer(10);
+
+        }
+
+        public Fade(TransitionType type, Color color, float speed, float jerk) : base(-BUFFER, -BUFFER, type)
+        {
+            this.color = color;
+            this.speed = speed;
+            this.jerk = jerk;
             Reset();
         }
 
         public void Reset()
         {
-            if (type == Type.FadeFromBlack)
+            if (Type == TransitionType.Enter)
             {
-                fade = new Color(0, 0, 0, 255);
+                alpha = 255;
             }
-            else
+            else if (Type == TransitionType.Exit)
             {
-                fade = new Color(0, 0, 0, 0);
+                alpha = 0;
             }
 
-            shape = new Shape(X - 32, Y - 32, Camera.ScreenBounds.Width + 64, Camera.ScreenBounds.Height + 64, fade);
+            fade = new Color(color, alpha);
+            shape = new Shape(X, Y, Width, Height, fade);
         }
 
-        private void FadeLogic(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            timer.Update(gameTime);
-            if (!Done && timer.Done)
+            if (!Started || Done)
+                return;
+
+            CalculateForce(gameTime);
+
+            switch (Type)
             {
-                switch (type)
-                {
-                    case Type.FadeToBlack:
-                        if (fade.A <= 240)
-                        {
-                            fade.A += 10;
-                        }
-                        else
-                        {
-                            Done = true;
-                        }
-                        break;
+                case TransitionType.Exit:
+                    if (alpha + velocity < 255)
+                    {
+                        alpha += (byte)(velocity);
+                    }
+                    else
+                    {
+                        alpha = 255;
+                        Finished();
+                    }
+                    break;
 
-                    case Type.FadeFromBlack:
-                        if (fade.A > 0)
-                        {
-                            fade *= 0.95f;
-                        }
-                        else
-                        {
-                            Done = true;
-                        }
-                        break;
-                }
-                shape.ObjectColor = fade;
-                timer.Reset();
+                case TransitionType.Enter:
+                    if (alpha - velocity > 0)
+                    {
+                        alpha -= (byte)(velocity);
+                    }
+                    else
+                    {
+                        alpha = 0;
+                        Finished();
+                    }
+                    break;
             }
+            Console.WriteLine(alpha);
+            fade = new Color(color, alpha);
+            shape.ObjectColor = fade;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            FadeLogic(gameTime);
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            shape.Draw(spriteBatch);
+            if (InProgress)
+                shape.Draw(spriteBatch);
         }
     }
 }

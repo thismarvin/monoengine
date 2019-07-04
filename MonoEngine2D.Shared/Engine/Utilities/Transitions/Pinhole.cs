@@ -4,43 +4,35 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoEngine2D.Engine.Root;
 using MonoEngine2D.Engine.Entities.Geometry;
 using MonoEngine2D.Engine.Utilities.Cameras;
+using MonoEngine2D.Shared.Engine.Utilities.Transitions;
 
 namespace MonoEngine2D.Engine.Utilities.Transitions
 {
-    class Pinhole : MonoObject
+    class Pinhole : Transition
     {
         Circle center;
 
-        float velocity;
-        float speed;
-        int dir;
-        float acceleration;
-        float scaledAcceleration;
-        bool done;
-        int frameIndex;
-
-        Type type;
-
-        public enum Type
+        public Pinhole(TransitionType type) : this(type, 100, 500)
         {
-            Open, Closed
+
         }
 
-        public Pinhole(float x, float y, Type type) : base(x, y)
+        public Pinhole(TransitionType type, float speed, float jerk) : base(type)
         {
-            this.type = type;
-            speed = 500;
-            acceleration = 100;
+            this.speed = speed;
+            this.jerk = jerk;
+            Reset();
+        }
 
-            switch (type)
+        public void Reset()
+        {            
+            switch (Type)
             {
-                case Type.Closed:
-                    center = new Circle(X, Y, -1000 * Camera.Scale, 1000 * Camera.Scale, Color.Black);
-                    dir = 1;
+                case TransitionType.Enter:
+                    center = new Circle(X, Y, Width / 2, Width / 2, Color.Black);
                     break;
-                case Type.Open:
-                    center = new Circle(X, Y, 1000 * Camera.Scale, 1000 * Camera.Scale, Color.Black);
-                    dir = 1;
+                case TransitionType.Exit:
+                    center = new Circle(X, Y, Width / 2, 1, Color.Black);
                     break;
             }
         }
@@ -48,16 +40,7 @@ namespace MonoEngine2D.Engine.Utilities.Transitions
         public new void SetLocation(float x, float y)
         {
             base.SetLocation(x, y);
-            frameIndex = 0;
-            switch (type)
-            {
-                case Type.Closed:
-                    center.SetLocation(X, Y);
-                    break;
-                case Type.Open:
-                    center.SetLocation(X, Y);
-                    break;
-            }
+            center.SetLocation(X, Y);
         }
 
         public void SetSpeed(float speed)
@@ -65,29 +48,38 @@ namespace MonoEngine2D.Engine.Utilities.Transitions
             velocity = velocity < 0 ? -speed : speed;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            if (done)
+            if (!InProgress)
                 return;
 
-            scaledAcceleration = acceleration * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            CalculateForce(gameTime);
 
-            if ((type == Type.Open && center.Radius < 1000 * Camera.Scale + 1000) || (type == Type.Closed && center.Radius < 0))
+            switch (Type)
             {
-                velocity = (scaledAcceleration * frameIndex + speed * dir) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                center.SetRadius(center.Radius + (int)velocity);
+                case TransitionType.Enter:
+                    center.SetLineWidth(center.LineWidth - velocity);
+                    if (center.LineWidth <= 1)
+                    {
+                        center.SetLineWidth(1);
+                        Finished();
+                    }
+                    break;
+                case TransitionType.Exit:
+                    center.SetLineWidth(center.LineWidth + velocity);
+                    if (center.LineWidth >= Width / 2)
+                    {
+                        center.SetLineWidth(Width / 2);
+                        Finished();
+                    }
+                    break;
             }
-            else
-            {
-                center.SetRadius(0);
-                done = true;
-            }
-            frameIndex++;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            center.Draw(spriteBatch);
+            if (InProgress)
+                center.Draw(spriteBatch);
         }
     }
 }
