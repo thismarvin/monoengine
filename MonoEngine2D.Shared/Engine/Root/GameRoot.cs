@@ -9,6 +9,7 @@ using MonoEngine2D.Engine.Utilities.Display;
 using MonoEngine2D.Engine.Utilities.Cameras;
 using MonoEngine2D.Engine.Utilities.Audio;
 using MonoEngine2D.Engine.Utilities.Misc;
+using MonoEngine2D.Shared.Engine.Scenes;
 
 namespace MonoEngine2D.Engine.Root
 {
@@ -153,8 +154,8 @@ namespace MonoEngine2D.Engine.Root
             Assets.LoadContent(Content);
 
             SoundManager.Initialize();
-            Playfield.Initialize();
-            HUD.Initialize();
+            SceneManager.Initialize();
+            //HUD.Initialize();
 
 #if !__IOS__ && !__ANDROID__
             if (startFullscreen)
@@ -182,8 +183,8 @@ namespace MonoEngine2D.Engine.Root
                 case Mode.Menu:
                     break;
                 case Mode.Playfield:
-                    Playfield.Update(gameTime);
-                    HUD.Update(gameTime);
+                    SceneManager.Update(gameTime);
+                    //HUD.Update(gameTime);
                     break;
             }
 
@@ -199,8 +200,8 @@ namespace MonoEngine2D.Engine.Root
                 case Mode.Menu:
                     break;
                 case Mode.Playfield:
-                    Playfield.Draw(spriteBatch);
-                    HUD.Draw(spriteBatch);
+                    SceneManager.Draw(spriteBatch);
+                    //HUD.Draw(spriteBatch);
                     break;
             }
 

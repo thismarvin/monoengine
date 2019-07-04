@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoEngine2D.Engine.Utilities.Cameras;
 using MonoEngine2D.Shared.Engine.Utilities.Transitions;
 using MonoEngine2D.Shared.Scenes;
 using System;
@@ -27,7 +28,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
         {
             scenes = new List<Scene>()
             {
-
+                new Test(),
             };
         }
 
@@ -126,6 +127,16 @@ namespace MonoEngine2D.Shared.Engine.Scenes
         public static void Draw(SpriteBatch spriteBatch)
         {
             CurrentScene.Draw(spriteBatch);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, null, null, null, StaticCamera.Transform);
+            {
+                if (enterTransition != null)
+                    enterTransition.Draw(spriteBatch);
+                if (exitTransition != null)
+                    exitTransition.Draw(spriteBatch);
+            }
+            spriteBatch.End();
+
         }
     }
 }

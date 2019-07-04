@@ -16,7 +16,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
     {
         public Test() : base(SceneType.Test)
         {
-
+            Entities.Add(new Circle(200, 100, 50, 5));
         }        
 
         public override void LoadScene()
@@ -31,7 +31,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
         protected override void Initialize()
         {
-            Entities.Add(new Circle(0, 0, 50));
+            //Entities.Add(new Circle(0, 0, 50));
         }
 
         protected override void InitializeTransitions()
@@ -88,7 +88,6 @@ namespace MonoEngine2D.Shared.Engine.Scenes
                 }
             }
             spriteBatch.End();
-
         }
     }
 }
