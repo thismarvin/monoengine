@@ -37,7 +37,7 @@ namespace MonoEngine2D.Engine.Utilities.Display
             DefaultWindowHeight = defaultWindowHeight;
 #endif
 
-            mappedKey = Keys.F10;
+            mappedKey = Keys.F11;
             WideScreenSupport = false;
 
             sampleFPS = new Queue<float>();
