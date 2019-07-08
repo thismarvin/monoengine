@@ -14,6 +14,8 @@ namespace MonoEngine2D.Engine.Utilities.Display
         public static int DisplayHeight { get; private set; }
         public static int DefaultWindowHeight { get; private set; }
         public static int DefaultWindowWidth { get; private set; }
+        public static int CurrentWindowWidth { get { return fullscreen ? DisplayWidth : DefaultWindowWidth; } }
+        public static int CurrentWindowHeight { get { return fullscreen ? DisplayHeight : DefaultWindowHeight; } }
         public static bool WideScreenSupport { get; private set; }
         public static float FPS { get; private set; }
 

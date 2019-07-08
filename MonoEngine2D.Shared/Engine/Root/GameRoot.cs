@@ -26,10 +26,6 @@ namespace MonoEngine2D.Engine.Root
         int pixelHeight;
         int scale;
 
-        public enum Mode
-        { Menu, Playfield, None }
-        public static Mode GameMode { get; set; }
-
         public enum Orientation
         { Landscape, Portrait }
         public static Orientation GameOrientation { get; set; }
@@ -37,6 +33,8 @@ namespace MonoEngine2D.Engine.Root
         public static bool ExitGame { get; set; }
         public static bool DebugMode { get; set; }
         bool released;
+
+        RasterizerState rasterizerState;
 
         public GameRoot()
         {
@@ -48,12 +46,9 @@ namespace MonoEngine2D.Engine.Root
             IsMouseVisible = true;
             startFullscreen = false;
 
-            GameMode = Mode.Playfield;
-
             SetupWindow(1280, 720, Orientation.Landscape);
             SetupPixelScene(320, 180, 1);
             EnableVSync(true);
-
             graphics.ApplyChanges();
         }
 
@@ -123,10 +118,17 @@ namespace MonoEngine2D.Engine.Root
             {
                 DebugMode = !DebugMode;
                 released = false;
+
+                rasterizerState = new RasterizerState();
+                rasterizerState.FillMode = DebugMode ? FillMode.WireFrame : FillMode.Solid;
             }
-            if (!released && Keyboard.GetState().IsKeyUp(Keys.F12)) { released = true; }
-            if (DebugMode) { Window.Title = title + " " + Math.Round(ScreenManager.FPS) + " FPS"; }
-            else { Window.Title = title; }
+
+            if (!released && Keyboard.GetState().IsKeyUp(Keys.F12))
+            {
+                released = true;
+            }
+
+            Window.Title = DebugMode ? title + " " + Math.Round(ScreenManager.FPS) + " FPS" : title;
         }
 
         private void ExitGameLogic()
@@ -150,17 +152,17 @@ namespace MonoEngine2D.Engine.Root
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            rasterizerState = new RasterizerState();
 
             Assets.LoadContent(Content);
 
             SoundManager.Initialize();
-            SceneManager.Initialize();
-            //HUD.Initialize();
+            SceneManager.Initialize();           
 
 #if !__IOS__ && !__ANDROID__
             if (startFullscreen)
                 ScreenManager.StartFullScreen(graphics);
-#endif
+#endif            
         }
 
         protected override void UnloadContent()
@@ -177,16 +179,8 @@ namespace MonoEngine2D.Engine.Root
             DebugModeToggle();
 
             ScreenManager.Update(gameTime, graphics);
-
-            switch (GameMode)
-            {
-                case Mode.Menu:
-                    break;
-                case Mode.Playfield:
-                    SceneManager.Update(gameTime);
-                    //HUD.Update(gameTime);
-                    break;
-            }
+            SceneManager.Update(gameTime);
+            ShapeManager.Update(GraphicsDevice);
 
             base.Update(gameTime);
         }
@@ -194,18 +188,12 @@ namespace MonoEngine2D.Engine.Root
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(PICO8.SkyBlue);
+            GraphicsDevice.RasterizerState = rasterizerState;
 
-            switch (GameMode)
-            {
-                case Mode.Menu:
-                    break;
-                case Mode.Playfield:
-                    SceneManager.Draw(spriteBatch);
-                    //HUD.Draw(spriteBatch);
-                    break;
-            }
 
+            SceneManager.Draw(spriteBatch);
             StaticCamera.Draw(spriteBatch);
+
             base.Draw(gameTime);
         }
     }
