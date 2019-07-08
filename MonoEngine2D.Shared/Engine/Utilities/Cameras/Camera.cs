@@ -7,12 +7,18 @@ using MonoEngine2D.Engine.Utilities.Display;
 namespace MonoEngine2D.Engine.Utilities.Cameras
 {
     static class Camera
-    {        
-        public static Rectangle ScreenBounds { get; private set; }
+    {
         public static Matrix Transform { get; private set; }
+        public static Matrix World { get; private set; }
+        public static Matrix View { get; private set; }
+        public static Matrix Projection { get; private set; }
+
+        public static Rectangle Bounds { get; private set; }
+
         public static Vector2 TopLeft;
         public static int Scale { get; private set; }
         public static float Zoom { get; private set; }
+
         static int pixelWidth;
         static int pixelHeight;
 
@@ -20,14 +26,22 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
         {
             CreatePixelScene(pixelWidth, pixelHeight, scale);
             Reset(ScreenManager.DefaultWindowWidth, ScreenManager.DefaultWindowHeight);
-            FinalizeMatrix();
+            SetupMatrices();
+            UpdateMatrices();
         }
 
         private static void CreatePixelScene(int pixelWidth, int pixelHeight, int scale)
-        {            
+        {
             Scale = scale;
             Camera.pixelWidth = pixelWidth * Scale;
             Camera.pixelHeight = pixelHeight * Scale;
+        }
+
+        private static void SetupMatrices()
+        {
+            World = Matrix.Identity * Matrix.CreateTranslation(new Vector3(ScreenManager.CurrentWindowWidth / Zoom / 2 - StaticCamera.HorizontalLetterBox + TopLeft.X, ScreenManager.CurrentWindowHeight / Zoom / 2 - StaticCamera.VerticalLetterBox + TopLeft.Y, 0));
+            View = Matrix.CreateLookAt(new Vector3(0, 0, -2), Vector3.Forward, Vector3.Up);
+            Projection = Matrix.CreateOrthographic(ScreenManager.CurrentWindowWidth / Zoom, ScreenManager.CurrentWindowHeight / Zoom, -1000, 1000);
         }
 
         public static void Reset(int windowWidth, int windowHeight)
@@ -54,7 +68,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
                             longSide = (int)((longDisplayDimension - longSide * Zoom) / Zoom) + longSide;
                         }
                     }
-                    ScreenBounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
+                    Bounds = new Rectangle(0, 0, longSide / Scale, shortSide / Scale);
                     break;
 
                 case GameRoot.Orientation.Portrait:
@@ -64,7 +78,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
                     {
                         Zoom = (float)longDisplayDimension / longSide;
                     }
-                    ScreenBounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
+                    Bounds = new Rectangle(0, 0, shortSide / Scale, longSide / Scale);
                     break;
             }
         }
@@ -72,7 +86,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
         public static void Update()
         {
             Input();
-            FinalizeMatrix();
+            UpdateMatrices();
         }
 
         public static void Update(Vector2 topLeft, float minWidth, float maxWidth, float minHeight, float maxHeight)
@@ -81,7 +95,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
 
             Input();
             StayWithinBounds(minWidth, maxWidth, minHeight, maxHeight);
-            FinalizeMatrix();
+            UpdateMatrices();
         }
 
         private static void Input()
@@ -101,16 +115,16 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
         {
             // Still Buggy!
             TopLeft.X = (TopLeft.X < minWidth ? minWidth : TopLeft.X);
-            TopLeft.X = (TopLeft.X > maxWidth ? maxWidth : TopLeft.X);
+            TopLeft.X = (TopLeft.X + Bounds.Width > maxWidth ? maxWidth - Bounds.Width: TopLeft.X);
             TopLeft.Y = (TopLeft.Y < minHeight ? 0 : TopLeft.Y);
-            TopLeft.Y = (TopLeft.Y + ScreenBounds.Height > maxHeight ? maxHeight - ScreenBounds.Height : TopLeft.Y);
+            TopLeft.Y = (TopLeft.Y + Bounds.Height > maxHeight ? maxHeight - Bounds.Height : TopLeft.Y);
         }
 
-        private static void FinalizeMatrix()
+        private static void UpdateMatrices()
         {
-            // Fixed on Top Left.
-            Transform = Matrix.CreateTranslation(new Vector3(-TopLeft.X + StaticCamera.HorizontalLetterBox, -TopLeft.Y + StaticCamera.VerticalLetterBox, 0)) *
-                        Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
+            Transform = Matrix.CreateTranslation(new Vector3(-TopLeft.X + StaticCamera.HorizontalLetterBox, -TopLeft.Y + StaticCamera.VerticalLetterBox, 0)) * Matrix.CreateScale(new Vector3(Zoom, Zoom, 0));
+            World = Matrix.Identity * Matrix.CreateTranslation(new Vector3(ScreenManager.CurrentWindowWidth / Zoom / 2 - StaticCamera.HorizontalLetterBox + TopLeft.X, ScreenManager.CurrentWindowHeight / Zoom / 2 - StaticCamera.VerticalLetterBox + TopLeft.Y, 0));
+            Projection = Matrix.CreateOrthographic(ScreenManager.CurrentWindowWidth / Zoom, ScreenManager.CurrentWindowHeight / Zoom, -1000, 1000);
         }
     }
 }
