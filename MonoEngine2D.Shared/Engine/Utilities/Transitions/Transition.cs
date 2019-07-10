@@ -26,7 +26,7 @@ namespace MonoEngine2D.Shared.Engine.Utilities.Transitions
         protected float jerk;
         protected float acceleration;
 
-        public Transition(TransitionType type) : this(Camera.ScreenBounds.Width / 2, Camera.ScreenBounds.Height / 2, type)
+        public Transition(TransitionType type) : this(Camera.Bounds.Width / 2, Camera.Bounds.Height / 2, type)
         {
 
         }
@@ -39,7 +39,7 @@ namespace MonoEngine2D.Shared.Engine.Utilities.Transitions
 
         private int GreaterDimension()
         {
-            return Camera.ScreenBounds.Width > Camera.ScreenBounds.Height ? Camera.ScreenBounds.Width + BUFFER * 2 : Camera.ScreenBounds.Height + BUFFER * 2;
+            return Camera.Bounds.Width > Camera.Bounds.Height ? Camera.Bounds.Width + BUFFER * 2 : Camera.Bounds.Height + BUFFER * 2;
         }
 
         public void Start()
