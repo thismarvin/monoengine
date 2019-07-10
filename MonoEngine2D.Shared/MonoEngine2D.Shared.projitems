@@ -23,6 +23,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Geometry\Spline.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\Kinetic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Entities\User\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Geometry\Quad.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Geometry\Shape.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Geometry\Triangle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Level\HUD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Level\Playfield.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Resources\Animation.cs" />
@@ -30,6 +33,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Resources\Sprite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Root\GameRoot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Root\MonoObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Scenes\Action.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Scenes\SceneManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Scenes\Test.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Audio\SoundManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Cameras\Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Cameras\StaticCamera.cs" />
@@ -41,9 +47,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Time\Timer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Transitions\Fade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Transitions\Pinhole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Transitions\Transition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Number.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\Typography\Text.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\Utilities\User Input\Input.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Engine\Scenes\Scene.cs" />
   </ItemGroup>
 </Project>
