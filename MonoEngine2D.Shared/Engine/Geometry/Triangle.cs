@@ -11,9 +11,6 @@ namespace MonoEngine2D.Shared.Engine.Geometry
 {
     class Triangle : Shape
     {
-        VertexPositionColor[] vertices;
-        BasicEffect effect;
-
         public Triangle(float x, float y, int width, int height) : base(x, y, width, height)
         {
             vertices = new VertexPositionColor[]

@@ -8,6 +8,9 @@ namespace MonoEngine2D.Shared.Engine.Geometry
 {
     abstract class Shape : MonoObject
     {
+        protected VertexPositionColor[] vertices;
+        protected BasicEffect effect;
+
         public Shape(float x, float y, int width, int height) : base(x, y, width, height)
         {
 
