@@ -79,12 +79,6 @@ namespace MonoEngine2D.Engine.Level
             EntityBuffer.Add(e);
         }
 
-        private static void BackToMenu()
-        {
-            Reset();
-            GameRoot.GameMode = GameRoot.Mode.Menu;
-        }
-
         private static void CameraHandler(GameTime gameTime)
         {
             Camera.Update();
