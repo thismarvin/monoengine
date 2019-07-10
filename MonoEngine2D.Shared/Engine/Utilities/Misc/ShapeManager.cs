@@ -9,7 +9,7 @@ namespace MonoEngine2D.Engine.Utilities.Misc
     {
         public static Texture2D Texture { get; private set; }
 
-        public static VertexBuffer Buffer;
+        static VertexBuffer vertexBuffer;
         private static List<VertexPositionColor> vertices;
 
         private ShapeManager()
@@ -23,7 +23,7 @@ namespace MonoEngine2D.Engine.Utilities.Misc
             Texture.SetData(new[] { Color.White });
 
             vertices = new List<VertexPositionColor>();
-            Buffer = new VertexBuffer(graphics.GraphicsDevice, VertexPositionColor.VertexDeclaration, 0, BufferUsage.WriteOnly);
+            vertexBuffer = new VertexBuffer(graphics.GraphicsDevice, VertexPositionColor.VertexDeclaration, 0, BufferUsage.WriteOnly);
         }
 
         public static void AddToVertexBuffer(VertexPositionColor[] vertices)
@@ -55,8 +55,7 @@ namespace MonoEngine2D.Engine.Utilities.Misc
 
         public static void Update(GraphicsDevice graphicsDevice)
         {
-            graphicsDevice.SetVertexBuffer(Buffer);
-            Console.WriteLine(vertices.Count);
+            graphicsDevice.SetVertexBuffer(vertexBuffer);
         }
     }
 }
