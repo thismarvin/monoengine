@@ -37,9 +37,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
 
             //rotation = (float)Math.PI / 2;
 
-            UpdateMatrices();
-
-            
+            UpdateMatrices();           
         }
 
         private static void CreatePixelScene(int pixelWidth, int pixelHeight, int scale)
@@ -90,7 +88,7 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
 
         public static void Update()
         {
-            Inputtt();
+            UpdateInput();
             UpdateMatrices();
         }
 
@@ -98,12 +96,12 @@ namespace MonoEngine2D.Engine.Utilities.Cameras
         {
             TopLeft = new Vector3(topLeft.X, topLeft.Y, 0);
 
-            Inputtt();
+            UpdateInput();
             StayWithinBounds(minWidth, maxWidth, minHeight, maxHeight);
             UpdateMatrices();
         }
 
-        private static void Inputtt()
+        private static void UpdateInput()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.OemPlus))
             {
