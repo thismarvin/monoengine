@@ -3,7 +3,6 @@
 
 /outputDir:bin/$(Platform)
 /intermediateDir:obj/$(Platform)
-/platform:Windows
 /config:
 /profile:Reach
 /compress:False
@@ -12,6 +11,12 @@
 
 
 #---------------------------------- Content ---------------------------------#
+
+#begin Assets/Effects/Test.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Assets/Effects/Test.fx
 
 #begin Assets/Sprites/ASCII 16.png
 /importer:TextureImporter
