@@ -13,6 +13,7 @@ namespace MonoEngine2D.Engine.Resources
         public static Texture2D Text8x8 { get; private set; }
         public static Texture2D Text16x16 { get; private set; }
         public static Texture2D Text19x19 { get; private set; }
+        public static Effect TestEffect { get; private set; }
 
         public static void LoadContent(ContentManager Content)
         {
@@ -21,6 +22,7 @@ namespace MonoEngine2D.Engine.Resources
             Text8x8 = Content.Load<Texture2D>("Assets/Sprites/ASCII 8");
             Text16x16 = Content.Load<Texture2D>("Assets/Sprites/ASCII 16");
             Text19x19 = Content.Load<Texture2D>("Assets/Sprites/ASCII 19");
+            TestEffect = Content.Load<Effect>("Assets/Effects/Test");
         }
     }
 }
