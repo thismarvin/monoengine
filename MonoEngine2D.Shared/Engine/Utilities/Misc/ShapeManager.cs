@@ -23,7 +23,7 @@ namespace MonoEngine2D.Engine.Utilities.Misc
             Texture.SetData(new[] { Color.White });
 
             vertices = new List<VertexPositionColor>();
-            vertexBuffer = new VertexBuffer(graphics.GraphicsDevice, VertexPositionColor.VertexDeclaration, 0, BufferUsage.WriteOnly);
+            vertexBuffer = new VertexBuffer(graphics.GraphicsDevice, typeof(VertexPositionColor), 1, BufferUsage.WriteOnly);
         }
 
         public static void AddToVertexBuffer(VertexPositionColor[] vertices)

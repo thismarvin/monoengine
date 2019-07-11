@@ -49,6 +49,9 @@ namespace MonoEngine2D.Engine.Root
             SetupWindow(1280, 720, Orientation.Landscape);
             SetupPixelScene(320, 180, 1);
             EnableVSync(true);
+
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
+
             graphics.ApplyChanges();
         }
 

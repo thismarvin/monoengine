@@ -1,0 +1,29 @@
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Sprites\ASCII 16.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Sprites\ASCII 19.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Sprites\ASCII 8.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Sprites\Player.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Sprites\Sprites.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\Content\Assets\Effects\Test.xnb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\PlaygoundDirectX.exe
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\PlaygoundDirectX.pdb
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\obj\x86\Debug\PlaygoundDirectX.csprojAssemblyReference.cache
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\obj\x86\Debug\PlaygoundDirectX.csproj.CoreCompileInputs.cache
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\obj\x86\Debug\PlaygoundDirectX.csproj.CopyComplete
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\obj\x86\Debug\PlaygoundDirectX.exe
+C:\Users\Marvin\Desktop\Master\Programming\MonoGame\Workspace\Git Projects\Monogame 2D Engine\monoengine\PlaygoundDirectX\obj\x86\Debug\PlaygoundDirectX.pdb
