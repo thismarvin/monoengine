@@ -19,13 +19,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
         List<Geometry.Shape> shapes;
         public Test() : base(SceneType.Test)
         {
-            Entities.Add(new MonoEngine2D.Engine.Entities.Geometry.Shape(0, 0, Camera.Bounds.Width, Camera.Bounds.Height, 2, Color.Red));
-            shapes = new List<Geometry.Shape>()
-            {
-                new Triangle(16,16,50,50),
-                new Quad(100,64,200,75),
-            };
-            //cameraTopLeft = new Vector2(10, 0);
+
         }
 
         public override void LoadScene()
@@ -40,7 +34,12 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
         protected override void Initialize()
         {
-            //Entities.Add(new Circle(0, 0, 50));
+            Entities.Add(new MonoEngine2D.Engine.Entities.Geometry.Shape(0, 0, Camera.Bounds.Width, Camera.Bounds.Height, 2, Color.Red));
+            shapes = new List<Geometry.Shape>()
+            {
+                new Triangle(16,16,50,50),
+                new Quad(100,64,200,75),
+            };
         }
 
         protected override void InitializeTransitions()
@@ -51,7 +50,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
         protected override void UpdateCamera(GameTime gameTime)
         {
-            //cameraTopLeft = new Vector2(cameraTopLeft.X + 0.1f * (float)gameTime.TotalGameTime.TotalSeconds, 0);
+            cameraTopLeft = new Vector2(cameraTopLeft.X + 0.1f * (float)gameTime.TotalGameTime.TotalSeconds, 0);
             Camera.Update(cameraTopLeft, 0, Camera.Bounds.Width * 1.5f, 0, Camera.Bounds.Height * 1.5f);
         }
 
@@ -86,13 +85,6 @@ namespace MonoEngine2D.Shared.Engine.Scenes
                 shapes.Remove(shapes[0]);
                 input.KeyReleased = false;
             }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            UpdateInput(gameTime);
-            UpdateEntities(gameTime);
-            UpdateCamera(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
