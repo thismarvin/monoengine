@@ -25,8 +25,6 @@ namespace MonoEngine2D.Shared.Scenes
         {
             Type = type;
             input = new Input(PlayerIndex.One);
-            Initialize();
-            InitializeTransitions();
         }
 
         protected abstract void Initialize();
@@ -41,7 +39,11 @@ namespace MonoEngine2D.Shared.Scenes
 
         protected abstract void UpdateInput(GameTime gameTime);
 
-        public abstract void Update(GameTime gameTime);
+        public void Update(GameTime gameTime)
+        {
+            UpdateInput(gameTime);
+            UpdateCamera(gameTime);
+        }
 
         public abstract void Draw(SpriteBatch spriteBatch);
     }

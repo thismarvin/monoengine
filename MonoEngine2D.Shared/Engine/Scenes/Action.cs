@@ -18,8 +18,18 @@ namespace MonoEngine2D.Shared.Engine.Scenes
         {
             Entities = new List<Entity>();
             EntityBuffer = new List<Entity>();
+
+            Initialize();
+            InitializeTransitions();
         }
 
         protected abstract void UpdateEntities(GameTime gameTime);
+
+        public new void Update(GameTime gameTime)
+        {
+            UpdateInput(gameTime);            
+            UpdateEntities(gameTime);
+            UpdateCamera(gameTime);
+        }
     }
 }
