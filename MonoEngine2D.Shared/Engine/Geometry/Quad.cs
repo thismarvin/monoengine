@@ -14,26 +14,37 @@ namespace MonoEngine2D.Shared.Engine.Geometry
         short[] indices;
         public Quad(float x, float y, int width, int height) : base(x, y, width, height)
         {
-            vertices = new VertexPositionColor[]
-            {
-                new VertexPositionColor(new Vector3(-X, -Y, 0), Color.Red),
-                new VertexPositionColor(new Vector3(-X + -width, -Y, 0), Color.Green),
-                new VertexPositionColor(new Vector3(-X + -width, -Y + -height, 0), Color.Green),
-                new VertexPositionColor(new Vector3(-X, -Y + -height, 0), Color.Blue),
-            };
-            ShapeManager.AddToVertexBuffer(vertices);
+            CreateVertices();
 
             indices = new short[3 * 2]
             {
                 0, 1, 2,
                 0, 2, 3
-            };
-            
+            };           
         }
 
-        public override void Delete()
+        protected override void CreateVertices()
+        {
+            vertices = new VertexPositionColor[]
+            {
+                new VertexPositionColor(new Vector3(-X, -Y, 0), Color.Red),
+                new VertexPositionColor(new Vector3(-X + -Width, -Y, 0), Color.Green),
+                new VertexPositionColor(new Vector3(-X + -Width, -Y + -Height, 0), Color.Green),
+                new VertexPositionColor(new Vector3(-X, -Y + -Height, 0), Color.Blue),
+            };
+            ShapeManager.AddToVertexBuffer(vertices);
+        }
+
+        public override void RemoveFromVertexBuffer()
         {
             ShapeManager.RemoveFromVertexBuffer(vertices);
+        }
+
+        public new void SetLocation(float x, float y)
+        {
+            base.SetLocation(x, y);
+            RemoveFromVertexBuffer();
+            CreateVertices();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

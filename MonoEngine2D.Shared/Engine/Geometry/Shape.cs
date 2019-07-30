@@ -16,7 +16,8 @@ namespace MonoEngine2D.Shared.Engine.Geometry
 
         }
 
-        public abstract void Delete();
+        protected abstract void CreateVertices();
+        public abstract void RemoveFromVertexBuffer();
         public abstract void Draw(SpriteBatch spriteBatch);
     }
 }
