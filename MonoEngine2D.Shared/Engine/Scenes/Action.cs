@@ -25,7 +25,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
         protected abstract void UpdateEntities(GameTime gameTime);
 
-        public new void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             UpdateInput(gameTime);            
             UpdateEntities(gameTime);

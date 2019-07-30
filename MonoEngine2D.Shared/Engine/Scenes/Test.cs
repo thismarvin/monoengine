@@ -17,6 +17,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
     class Test : Action
     {
         List<Geometry.Shape> shapes;
+        List<Circle> shapes2;
         public Test() : base(SceneType.Test)
         {
 
@@ -40,6 +41,11 @@ namespace MonoEngine2D.Shared.Engine.Scenes
                 new Triangle(16,16,50,50),
                 new Quad(100,64,200,75),
             };
+            shapes2 = new List<Circle>()
+            {
+                new Circle(10,10,20),
+            };
+            shapes2[0].SetLocation(10, 20);
         }
 
         protected override void InitializeTransitions()
@@ -50,7 +56,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
         protected override void UpdateCamera(GameTime gameTime)
         {
-            cameraTopLeft = new Vector2(cameraTopLeft.X + 0.1f * (float)gameTime.TotalGameTime.TotalSeconds, 0);
+            //cameraTopLeft = new Vector2(cameraTopLeft.X + 0.1f * (float)gameTime.TotalGameTime.TotalSeconds, 0);
             Camera.Update(cameraTopLeft, 0, Camera.Bounds.Width * 1.5f, 0, Camera.Bounds.Height * 1.5f);
         }
 
@@ -73,6 +79,9 @@ namespace MonoEngine2D.Shared.Engine.Scenes
             }
 
             Entities.Sort();
+
+            //shapes[0].SetLocation(shapes[0].X + (float)gameTime.ElapsedGameTime.TotalSeconds * 10, shapes[0].Y);
+            //((Triangle)shapes[0]).SetLocation(shapes[0].X + (float)gameTime.ElapsedGameTime.TotalSeconds * 10, shapes[0].Y);
         }
 
         protected override void UpdateInput(GameTime gameTime)
@@ -81,7 +90,7 @@ namespace MonoEngine2D.Shared.Engine.Scenes
 
             if (input.Pressing(Input.InputType.MovementUp) && input.KeyReleased)
             {
-                shapes[0].Delete();
+                shapes[0].RemoveFromVertexBuffer();
                 shapes.Remove(shapes[0]);
                 input.KeyReleased = false;
             }

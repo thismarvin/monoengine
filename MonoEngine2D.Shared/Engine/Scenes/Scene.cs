@@ -39,11 +39,7 @@ namespace MonoEngine2D.Shared.Scenes
 
         protected abstract void UpdateInput(GameTime gameTime);
 
-        public void Update(GameTime gameTime)
-        {
-            UpdateInput(gameTime);
-            UpdateCamera(gameTime);
-        }
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Draw(SpriteBatch spriteBatch);
     }
